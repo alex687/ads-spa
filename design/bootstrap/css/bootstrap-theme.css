@@ -403,9 +403,15 @@
     background-color: transparent;
     border: 1px solid transparent;
 }
+a.list-group-item{
+    color: #000000;
+    font-style: italic;
+    font-weight: bold;
+}
 
 a.list-group-item:hover,
 a.list-group-item:focus {
+    color: #000000;
     text-decoration: none;
     background-color: #daa600;
     border: 1px solid #926f00;
