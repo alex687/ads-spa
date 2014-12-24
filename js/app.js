@@ -17,4 +17,5 @@ var adsApp = angular
                 templateUrl: 'templates/edit-artist.html'
             })
             .otherwise({redirectTo: '/'});
-    });
+    }).
+    constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/');
