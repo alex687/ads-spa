@@ -19,7 +19,6 @@ header {
 .item-date {
     display: inline-block;
     line-height: 35px;
-    float: right;
     font-size: 18px;
     font-weight: bold;
     clear-after: none;

@@ -1,0 +1,47 @@
+<div class="row" ng-controller="LoginController">
+    <aside class="col-md-2">
+        <section class="panel panel-default shadow">
+
+            <div class="panel-body">
+                <p><strong>To publish a new ad, please login.</strong></p>
+
+                <p>
+                    <a href="#/login" class="btn btn-default" style="width: 100%;">Login</a>
+                </p>
+                <p>
+                    <a href="#/register" class="btn btn-default" style="width: 100%;">Register</a>
+                </p>
+            </div>
+        </section>
+    </aside>
+    <div class="col-md-10">
+        <div class="alert alert-warning" role="alert" ng-show="loginAlert">{{alertMessage}}</div>
+        <div class="panel panel-default shadow">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center">Login</h2>
+            </div>
+
+            <div class="panel-body">
+                <div class="control-group">
+                    <label class="control-label" for="username">Username</label>
+                    <div class="controls">
+                        <input type="text" id="username" placeholder="Username" class="form-control" ng-model="user.username">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputPassword">Password</label>
+                    <div class="controls">
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="user.password">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button ng-click="login(user)" class="btn btn-default">Sign in</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

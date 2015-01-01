@@ -10,14 +10,17 @@
     <script type="text/javascript" src="lib/angular/angular-route.js"></script>
     <script type="text/javascript" src="lib/angular/angular-resource.js"></script>
 </head>
-<body ng-app="adsApp" ng-cloak>
+<body ng-app="adsApp" ng-cloak ng-controller="MainController">
 <header class="row">
-    <div class="col-md-12"><h1 class="text-center">Ads- Home</h1></div>
+    <div class="col-md-12"><h1 class="text-center">Ads- {{pageName}}</h1></div>
 </header>
 <div class="container" ng-view>
-</div>
+</div>  
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/services/adsData.js"></script>
+<script type="text/javascript" src="js/services/userData.js"></script>
+<script type="text/javascript" src="js/controllers/MainController.js"></script>
 <script type="text/javascript" src="js/controllers/HomeController.js"></script>
+<script type="text/javascript" src="js/controllers/LoginController.js"></script>
 </body>
 </html>

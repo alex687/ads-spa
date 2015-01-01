@@ -1,27 +1,59 @@
 'use strict';
 
-adsApp.controller('HomeController', function HomeController($scope, adsData, $location) {
-    console.log($location);
-    adsData.getAllCategories().success(function(data){
-            $scope.categories = data;
+adsApp.controller('HomeController', function HomeController($scope, adsData, $routeParams) {
+    var params = {PageSize: 5};
+    if ($routeParams.townId) {
+        params.TownId = $routeParams.townId;
+    }
+
+    if ($routeParams.categoryId) {
+        params.CategoryId = $routeParams.categoryId;
+    }
+
+    adsData.getAllPublishedAds(params).success(function (data) {
+        $scope.ads = data.ads;
+    });
+
+    adsData.getAllCategories().success(function (data) {
+        $scope.categories = data;
     });
 
     adsData.getALlTowns().success(function (data) {
         $scope.towns = data;
     });
 
+    $scope.getCategoryUrl = function (categoryId) {
+        if ($routeParams.townId) {
+            return "#/town/" + $routeParams.townId + "/category/" + categoryId;
+        }
 
-    adsData.getAllPublishedAds().success(function(data){
-        $scope.ads = data.ads;
-        console.log(data);
-    });
+        return "#/category/" + categoryId;
+    };
 
-    $scope.changeCategory = function(){
-        return $location.url();
+    $scope.getTownUrl = function (townId) {
+        if ($routeParams.categoryId) {
+            return "#/town/" + townId + "/category/" + $routeParams.categoryId;
+        }
+
+        return "#/town/" + townId;
     };
-    
-    $scope.changeTown = function () {
-        
+
+    $scope.removeTownFiltrationUrl = function () {
+        if($routeParams.categoryId){
+            return '#/category/' + $routeParams.categoryId;
+        }
+
+        return '#/';
     };
+
+    $scope.removeCategoryFiltrationUrl = function () {
+        if($routeParams.townId){
+            return '#/town/' + $routeParams.townId;
+        }
+
+        return '#/';
+    };
+
+    $scope.$emit('changePageName',  'Home');
 
 });

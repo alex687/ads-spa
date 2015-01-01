@@ -1,4 +1,4 @@
-adsApp.factory('userData', function ($resource, serviceBaseUrl) {
+adsApp.factory('userData', function ($http, serviceBaseUrl) {
 
     function register(username, password, confirmPassword, name, email, phone, townId) {
         var data = {
@@ -25,4 +25,14 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl) {
         return $http.post(serviceBaseUrl + 'user/login/', data);
     }
 
+
+    function saveCredentials(credentials){
+        //TODO save credentials
+        //localStorage.setItem();
+    }
+
+    return {
+        register: register,
+        login: login
+    }
 });

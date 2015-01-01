@@ -7,13 +7,13 @@ var adsApp = angular
             .when('/', {
                 templateUrl: 'templates/home.html'
             })
-            .when('/town/:townId/category/:categoryId', {
+            .when('/category/:categoryId/', {
                 templateUrl: 'templates/home.html'
             })
             .when('/town/:townId/', {
                 templateUrl: 'templates/home.html'
             })
-            .when('category/:categoryId', {
+            .when('/town/:townId/category/:categoryId', {
                 templateUrl: 'templates/home.html'
             })
             .when('/login', {
@@ -25,6 +25,6 @@ var adsApp = angular
             .when('/user/home', {
                 templateUrl: 'templates/edit-artist.html'
             })
-            .otherwise({redirectTo: '/'});
+                .otherwise({redirectTo: '/'});
     }).
     constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/');
