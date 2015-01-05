@@ -54,6 +54,19 @@ adsApp.controller('HomeController', function HomeController($scope, adsData, $ro
         return '#/';
     };
 
+    $scope.totalItems = 64;
+    $scope.currentPage = 4;
+    $scope.maxSize = 5;
+
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+
+    $scope.pageChanged = function() {
+        $log.log('Page changed to: ' + $scope.currentPage);
+    };
+
+
     $scope.$emit('changePageName',  'Home');
 
 });

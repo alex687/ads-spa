@@ -3,6 +3,7 @@
 adsApp.controller('LoginController', function LoginController($scope, userData) {
     $scope.$emit('changePageName', 'Login');
     $scope.loginAlert = false;
+
     $scope.login = function (user) {
         userData.login(user.username, user.password).success(function (data) {
             $scope.loginAlert = false;

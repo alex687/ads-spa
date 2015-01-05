@@ -24,7 +24,7 @@
                     <div class="col-md-3"><span class="item-date">{{ad.date | date: 'd-MMM-yyyy'}}</span></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 label label-default"  ng-switch on="ad.imageDataUrl">
+                    <div class="col-md-4 label label-default image-container"  ng-switch on="ad.imageDataUrl">
                         <img src="" ng-src="" ng-switch-when="null">
                         <img src="" ng-src="{{ad.imageDataUrl}}" ng-switch-default>
                     </div>
@@ -63,24 +63,10 @@
             </div>
         </div>
 
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-
+        <div>
+            <h4>Default</h4>
+            <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+        </div>
     </div>
     <aside class="col-md-2">
         <section class="panel panel-default shadow">

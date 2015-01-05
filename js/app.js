@@ -1,7 +1,7 @@
 'use strict';
 
 var adsApp = angular
-    .module('adsApp', ['ngResource', 'ngRoute'])
+    .module('adsApp', ['ngResource', 'ngRoute', 'ui.bootstrap', 'ipCookie'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {

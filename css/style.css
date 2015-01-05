@@ -24,3 +24,8 @@ header {
     font-weight: bold;
     clear-after: none;
 }
+
+.image-container  img {
+    width: 100%;
+    height: 100%;
+}

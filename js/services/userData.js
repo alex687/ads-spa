@@ -25,12 +25,6 @@ adsApp.factory('userData', function ($http, serviceBaseUrl) {
         return $http.post(serviceBaseUrl + 'user/login/', data);
     }
 
-
-    function saveCredentials(credentials){
-        //TODO save credentials
-        //localStorage.setItem();
-    }
-
     return {
         register: register,
         login: login
