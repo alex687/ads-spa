@@ -1,30 +1,51 @@
 'use strict';
 
 var adsApp = angular
-    .module('adsApp', ['ngResource', 'ngRoute', 'ui.bootstrap', 'ipCookie'])
-    .config(function ($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'templates/home.html'
+    .module('adsApp', ['ngResource', 'ui.bootstrap', 'ipCookie', 'ui.router', 'permission'])
+    .config(function ($stateProvider, $urlRouterProvider) {
+        //
+        // For any unmatched url, redirect to /state1
+        $urlRouterProvider.otherwise("/");
+        //
+        // Now set up the states
+        $stateProvider
+            .state('home', {
+                url: "/",
+                templateUrl: "templates/home.html"
             })
-            .when('/category/:categoryId/', {
-                templateUrl: 'templates/home.html'
+            .state('login', {
+                url: "/login",
+                templateUrl: "templates/login.html",
+                data: {
+                    permissions: {
+                        only: ['anonymous'],
+                        redirectTo: 'home'
+                    }
+                }
             })
-            .when('/town/:townId/', {
-                templateUrl: 'templates/home.html'
+            .state('register', {
+                url: "/register",
+                templateUrl: "templates/register.html",
+                data: {
+                    permissions: {
+                        only: ['anonymous'],
+                        redirectTo: 'home'
+                    }
+                }
             })
-            .when('/town/:townId/category/:categoryId', {
-                templateUrl: 'templates/home.html'
-            })
-            .when('/login', {
-                templateUrl: 'templates/login.html'
-            })
-            .when('/register', {
-                templateUrl: 'templates/register.html'
-            })
-            .when('/user/home', {
-                templateUrl: 'templates/edit-artist.html'
-            })
-                .otherwise({redirectTo: '/'});
-    }).
-    constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/');
+    })
+    .constant('serviceBaseUrl', 'http://localhost:1337/api/')
+    .run(function (Permission, authorization) {
+
+        Permission.defineRole('anonymous', function (stateParams) {
+            return !authorization.isUser();
+        });
+
+        Permission.defineRole('user', function (stateParams) {
+            return authorization.isUser();
+        });
+
+        Permission.defineRole('admin', function (stateParams) {
+            return authorization.isAdmin();
+        });
+    });

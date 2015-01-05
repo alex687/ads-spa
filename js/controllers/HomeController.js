@@ -1,18 +1,7 @@
 'use strict';
 
-adsApp.controller('HomeController', function HomeController($scope, adsData, $routeParams) {
+adsApp.controller('HomeController', function HomeController($scope, adsData, $stateParams) {
     var params = {PageSize: 5};
-    if ($routeParams.townId) {
-        params.TownId = $routeParams.townId;
-    }
-
-    if ($routeParams.categoryId) {
-        params.CategoryId = $routeParams.categoryId;
-    }
-
-    adsData.getAllPublishedAds(params).success(function (data) {
-        $scope.ads = data.ads;
-    });
 
     adsData.getAllCategories().success(function (data) {
         $scope.categories = data;
@@ -22,36 +11,24 @@ adsApp.controller('HomeController', function HomeController($scope, adsData, $ro
         $scope.towns = data;
     });
 
-    $scope.getCategoryUrl = function (categoryId) {
-        if ($routeParams.townId) {
-            return "#/town/" + $routeParams.townId + "/category/" + categoryId;
-        }
-
-        return "#/category/" + categoryId;
+    $scope.filterByCategory = function (categoryId) {
+       params.categoryId = categoryId;
+        loadAds(params);
     };
 
-    $scope.getTownUrl = function (townId) {
-        if ($routeParams.categoryId) {
-            return "#/town/" + townId + "/category/" + $routeParams.categoryId;
-        }
-
-        return "#/town/" + townId;
+    $scope.filterByTown = function (townId) {
+        params.townId = townId;
+        loadAds(params);
     };
 
-    $scope.removeTownFiltrationUrl = function () {
-        if($routeParams.categoryId){
-            return '#/category/' + $routeParams.categoryId;
-        }
-
-        return '#/';
+    $scope.removeTownFiltration = function () {
+        delete  params['townId'];
+        loadAds(params);
     };
 
-    $scope.removeCategoryFiltrationUrl = function () {
-        if($routeParams.townId){
-            return '#/town/' + $routeParams.townId;
-        }
-
-        return '#/';
+    $scope.removeCategoryFiltration = function () {
+        delete  params['categoryId'];
+        loadAds(params);
     };
 
     $scope.totalItems = 64;
@@ -69,4 +46,11 @@ adsApp.controller('HomeController', function HomeController($scope, adsData, $ro
 
     $scope.$emit('changePageName',  'Home');
 
+    function loadAds(params) {
+        adsData.getAllPublishedAds(params).success(function (data) {
+            $scope.ads = data.ads;
+            console.log(data);
+        });
+    }
+    loadAds(params);
 });

@@ -1,4 +1,4 @@
-adsApp.factory('authentication', function ($q, ipCookie) {
+adsApp.factory('authorization', function ($q, ipCookie) {
 
 
     function saveCredentials(credentials) {
@@ -14,11 +14,26 @@ adsApp.factory('authentication', function ($q, ipCookie) {
     }
 
     function isUser(){
-     //TODO check is user
+        if(isLogged()){
+            return true;
+        }
+        return false;
+    }
+
+    function isAdmin(){
+        if(isUser()){
+            if(ipCookie('admin') == 'true'){
+                return true;
+            }
+        }
+        return false;
     }
 
     return {
-        saveCredentials: saveCredentials
+        saveCredentials: saveCredentials,
+        isUser: isUser,
+        isLogged: isLogged,
+        isAdmin: isAdmin
     }
 
 });

@@ -10,17 +10,20 @@
     <script type="text/javascript" src="lib/angular/angular-route.js"></script>
     <script type="text/javascript" src="lib/angular/angular-resource.js"></script>
     <script type="text/javascript" src="lib/angular-cookie.js"></script>
+    <script type="text/javascript" src="lib/angular-ui-router.js"></script>
+    <script type="text/javascript" src="lib/angular-permission.js"></script>
     <script type="text/javascript" src="lib/ui-bootstrap-0.12.0.js"></script>
 </head>
 <body ng-app="adsApp" ng-cloak ng-controller="MainController">
 <header class="row">
     <div class="col-md-12"><h1 class="text-center">Ads- {{pageName}}</h1></div>
 </header>
-<div class="container" ng-view>
+<div class="container" ui-view>
 </div>  
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/services/adsData.js"></script>
 <script type="text/javascript" src="js/services/userData.js"></script>
+<script type="text/javascript" src="js/services/authorization.js"></script>
 <script type="text/javascript" src="js/controllers/MainController.js"></script>
 <script type="text/javascript" src="js/controllers/HomeController.js"></script>
 <script type="text/javascript" src="js/controllers/LoginController.js"></script>

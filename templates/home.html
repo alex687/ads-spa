@@ -75,8 +75,8 @@
             </div>
             <div class="panel-body">
                 <div class="list-group">
-                    <a href="{{removeCategoryFiltrationUrl()}}" class="list-group-item"> All </a>
-                    <a href="{{getCategoryUrl(category.id)}}" class="list-group-item"
+                    <a href="#" ng-click="removeCategoryFiltration()" class="list-group-item"> All </a>
+                    <a href="#" ng-click="filterByCategory(category.id)" class="list-group-item"
                        ng-repeat="category in categories">
                         {{category.name}} </a>
                 </div>
@@ -89,8 +89,8 @@
             </div>
             <div class="panel-body">
                 <div class="list-group">
-                    <a href="{{removeTownFiltrationUrl()}}" class="list-group-item"> All </a>
-                    <a href="{{getTownUrl(town.id)}}" class="list-group-item" ng-repeat="town in towns">
+                    <a href="#" ng-click="removeTownFiltration()" class="list-group-item"> All </a>
+                    <a href="#" ng-click="filterByTown(town.id)"class="list-group-item" ng-repeat="town in towns">
                         {{town.name}} </a>
                 </div>
             </div>
