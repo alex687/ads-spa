@@ -8,6 +8,7 @@
                 <p>
                     <a href="#/login" class="btn btn-default" style="width: 100%;">Login</a>
                 </p>
+
                 <p>
                     <a href="#/register" class="btn btn-default" style="width: 100%;">Register</a>
                 </p>
@@ -22,24 +23,29 @@
             </div>
 
             <div class="panel-body">
-                <div class="control-group">
-                    <label class="control-label" for="username">Username</label>
-                    <div class="controls">
-                        <input type="text" id="username" placeholder="Username" class="form-control" ng-model="user.username">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="inputPassword">Password</label>
-                    <div class="controls">
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="user.password">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <button ng-click="login(user)" class="btn btn-default">Sign in</button>
-                    </div>
-                </div>
+                <form name="loginForm">
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label class="control-label" for="username">Username</label>
 
+                            <input type="text" id="username" placeholder="Username" class="form-control"
+                                   ng-model="user.username">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label class="control-label" for="inputPassword">Password</label>
+
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                                   ng-model="user.password">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <button ng-click="login(user)" class="btn btn-default col-md-4">Sign in</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 

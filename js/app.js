@@ -34,7 +34,7 @@ var adsApp = angular
                 }
             })
     })
-    .constant('serviceBaseUrl', 'http://localhost:1337/api/')
+    .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')
     .run(function (Permission, authorization) {
 
         Permission.defineRole('anonymous', function (stateParams) {
