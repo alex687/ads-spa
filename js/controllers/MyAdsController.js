@@ -1,7 +1,7 @@
 'use strict';
 
-adsApp.controller('MyAdsController', function HomeController($scope, adsData, authorization) {
-    var params = {PageSize: 5};
+adsApp.controller('MyAdsController', function HomeController($scope, adsData, authorization, pageSize) {
+    var params = {PageSize: pageSize};
 
     adsData.getAllCategories().success(function (data) {
         $scope.categories = data;

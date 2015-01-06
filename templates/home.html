@@ -50,24 +50,11 @@
         </div>
 
         <div>
-            <h4>Default</h4>
             <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
         </div>
     </div>
     <aside class="col-md-2">
-        <section class="panel panel-default shadow">
-            <div class="panel-heading">
-                <h2 class="panel-title text-center">Categories</h2>
-            </div>
-            <div class="panel-body">
-                <div class="list-group">
-                    <a href="#" ng-click="removeCategoryFiltration()" class="list-group-item"> All </a>
-                    <a href="#" ng-click="filterByCategory(category.id)" class="list-group-item"
-                       ng-repeat="category in categories">
-                        {{category.name}} </a>
-                </div>
-            </div>
-        </section>
+        <div categories-section></div>
 
         <section class="panel panel-default shadow">
             <div class="panel-heading">

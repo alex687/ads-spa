@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl) {
+adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorization) {
 
     function getAllPublishedAds(params) {
         return $http({method: 'GET', url: serviceBaseUrl + 'ads/', params: params});
@@ -14,13 +14,13 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl) {
         return $http({method: 'GET', url: serviceBaseUrl + 'towns/'});
     }
 
+    var headers = authorization.getHeaders();
+
     var resource = $resource(
         'http://softuni-ads.azurewebsites.net/api/user/ads/:id',
-        {id: '@id'},
+        null,
         {
-            update: {
-                method: 'PUT'
-            }
+            'save': {method: 'POST', headers: headers}
         });
 
     function getAllUerAds() {

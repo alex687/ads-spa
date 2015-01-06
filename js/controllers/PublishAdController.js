@@ -1,13 +1,17 @@
 'use strict';
 
-adsApp.controller('PublishAdController', function HomeController($scope, adsData, authorization) {
+adsApp.controller('PublishAdController', function HomeController($scope, adsData) {
     $scope.publishAdAlert = false;
+    adsData.getAllCategories().success(function (categories) {
+        $scope.categories = categories;
+    });
+
     $scope.publish = function (ad) {
-        userData.login().success(function (data) {
+        adsData.createNewAd(ad).$promise.then(function (data) {
             $scope.publishAdAlert = false;
-            authorization.saveCredentials(data);
+
             $state.go('home');
-        }).error(function (data) {
+        }, function (data) {
             $scope.publishAdAlert = true;
             $scope.alertMessage = data.error_description
         });

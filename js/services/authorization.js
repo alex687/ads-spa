@@ -29,11 +29,16 @@ adsApp.factory('authorization', function ($q, ipCookie) {
         return false;
     }
 
+    function getHeaders(){
+        return 'Bearer ' + ipCookie('access_token');
+    }
+
     return {
         saveCredentials: saveCredentials,
         isUser: isUser,
         isLogged: isLogged,
-        isAdmin: isAdmin
+        isAdmin: isAdmin,
+        getHeaders: getHeaders
     }
 
 });
