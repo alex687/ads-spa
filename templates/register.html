@@ -1,0 +1,113 @@
+<div class="row" ng-controller="RegisterController">
+    <aside class="col-md-2">
+        <section class="panel panel-default shadow">
+
+            <div class="panel-body">
+                <p><strong>To publish a new ad, please login.</strong></p>
+
+                <p>
+                    <a href="#/login" class="btn btn-default" style="width: 100%;">Login</a>
+                </p>
+
+                <p>
+                    <a href="#/register" class="btn btn-default" style="width: 100%;">Register</a>
+                </p>
+            </div>
+        </section>
+    </aside>
+    <div class="col-md-10">
+        <div class="alert alert-warning" role="alert" ng-show="registerAlert">{{alertMessage}}</div>
+        <div class="panel panel-default shadow">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center">Registration</h2>
+            </div>
+
+            <div class="panel-body">
+                <form name="registerForm">
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="input-username" class="control-label">Username</label>
+                            <input type="text" data-ng-model="user.username" required="required"
+                                   class="form-control"
+                                   id="input-username" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="input-password" class="control-label">Password</label>
+
+                            <input type="password" data-ng-model="user.password"
+                                   data-ng-pattern="passwordPattern"
+                                   required="required" class="form-control"
+                                   id="input-password" placeholder="Password">
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="input-confirm-password" class="control-label">Confirm
+                                Password</label>
+
+                            <input type="password" data-ng-model="user.confirmPassword"
+                                   data-ng-pattern="passwordPattern"
+                                   required="required"
+                                   class="form-control" id="input-confirm-password"
+                                   placeholder="Confirm Password">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="input-name" class="control-label">Name</label>
+
+                            <div>
+                                <input type="text" data-ng-model="user.name" required="required"
+                                       class="form-control"
+                                       id="input-name" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="input-email" class="control-label pull-left">Email</label>
+
+                            <div>
+                                <input type="text" data-ng-model="user.email" data-ng-pattern="emailValidationPattern"
+                                       required="required"
+                                       class="form-control"
+                                       id="input-email" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="input-phone" class="control-label">Phone</label>
+
+                            <div>
+                                <input type="text" data-ng-model="user.phone" class="form-control"
+                                       id="input-phone" placeholder="Phone">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="reg-select-town" class="control-label pull-left">Town</label>
+
+                            <div>
+                                <select class="form-control" id="reg-select-town" data-ng-model="user.townId">
+                                    <option data-ng-repeat="town in towns" data-id="{{town.id}}"
+                                            value="{{town.id}}">
+                                        {{town.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <button data-ng-click="register(user, registerForm)"
+                                    data-ng-disabled="registerForm.$invalid || user.password != user.confirmPassword"
+                                    class="btn btn-default col-md-4">Register
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
