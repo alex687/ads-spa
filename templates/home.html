@@ -1,19 +1,5 @@
-<div class="row " ng-controller="HomeController">
-    <aside class="col-md-2">
-        <section class="panel panel-default shadow">
-
-            <div class="panel-body">
-                <p><strong>To publish a new ad, please login.</strong></p>
-
-                <p>
-                    <a href="#/login" class="btn btn-default" style="width: 100%;">Login</a>
-                </p>
-
-                <p>
-                    <a href="#/register" class="btn btn-default" style="width: 100%;">Register</a>
-                </p>
-            </div>
-        </section>
+ <div class="row " ng-controller="HomeController">
+    <aside class="col-md-2" ng-include="menu">
     </aside>
     <div class="col-md-8">
         <div class="panel panel-default shadow" ng-repeat="ad in ads">

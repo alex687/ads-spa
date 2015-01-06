@@ -11,7 +11,7 @@ adsApp.controller('RegisterController', function RegisterController($scope, user
     });
 
     $scope.register = function (user) {
-        userData.register(user.username, user.password).success(function (data) {
+        userData.register(user.username, user.password, user.confirmPassword, user.name, user.email, user.phone, user.townId).success(function (data) {
             $scope.registerAlert = false;
             authorization.saveCredentials(data);
             $state.go('home');

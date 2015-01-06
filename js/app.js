@@ -33,8 +33,19 @@ var adsApp = angular
                     }
                 }
             })
+            .state('publish', {
+                url: "/user/ads/publish",
+                templateUrl: "templates/publish-ad.html",
+                data: {
+                    permissions: {
+                        except: ['anonymous'],
+                        redirectTo: 'login'
+                    }
+                }
+            })
     })
     .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')
+    .constant('pageSize', 5)
     .run(function (Permission, authorization) {
 
         Permission.defineRole('anonymous', function (stateParams) {
