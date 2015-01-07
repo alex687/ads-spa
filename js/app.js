@@ -52,6 +52,15 @@ var adsApp = angular
                         redirectTo: 'login'
                     }
                 }
+            })    .state('user-ad-edit', {
+                url: "#/user/ads/edit/{{ad.id:integer}}",
+                templateUrl: "templates/edit-ad.html",
+                data: {
+                    permissions: {
+                        except: ['anonymous'],
+                        redirectTo: 'login'
+                    }
+                }
             })
     })
     .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')

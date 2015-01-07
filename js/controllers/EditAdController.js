@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.controller('PublishAdController', function PublishAdController($scope, adsData) {
+adsApp.controller('EditAdController', function PublishAdController($scope, adsData) {
     $scope.publishAdAlert = false;
     $scope.publishAdSuccess = false;
 

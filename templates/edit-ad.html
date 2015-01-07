@@ -1,4 +1,4 @@
-<div class="row" ng-controller="PublishAdController">
+<div class="row" ng-controller="EditAdController">
     <aside class="col-md-2" ng-include="'templates/logged-menu.html'">
     </aside>
     <div class="col-md-10">
@@ -38,7 +38,7 @@
                             <label class="col-md-1">Image: </label>
 
                             <div class="col-md-11">
-                               <div browse-image preview="#img-preview" image="imageSetData"></div>
+                                <div browse-image preview="#img-preview" image="imageSetData"></div>
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         <div>
                             <button data-ng-click="publish(ad, adPublishForm)"
                                     data-ng-disabled="adPublishForm.$invalid"
-                                    class="btn btn-default col-md-4">Publish
+                                    class="btn btn-default col-md-4">Edit
                             </button>
                         </div>
                     </div>

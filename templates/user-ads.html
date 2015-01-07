@@ -1,7 +1,6 @@
 <div class="row " ng-controller="UserAdsController">
     <aside class="col-md-2">
-        <ng-include
-        ="'templates/logged-menu.html'></ng-include>
+        <div ng-include="'templates/logged-menu.html'"></div>
 
         <section class="panel panel-default shadow">
         <div class="panel-heading">
@@ -9,10 +8,10 @@
         </div>
         <div class="panel-body">
             <div class="list-group">
-                <a href="#/" class="list-group-item">All</a>
-                <a href="#/user/ads/" class="list-group-item">Published</a>
-                <a href="#/user/ads/publish" class="list-group-item">Waiting Approval</a>
-                <a href="#/user/ads/publish" class="list-group-item">Rejected</a>
+                <span class="list-group-item" ng-click="removeStatusFilter()">All</span>
+                <span class="list-group-item" ng-click="changeStatusFilter('Published')">Published</span>
+                <span class="list-group-item" ng-click="changeStatusFilter('WaitingApproval')">Waiting Approval</span>
+                <span class="list-group-item" ng-click="changeStatusFilter('Inactive')">Rejected</span>
             </div>
         </div>
         </section>
@@ -69,13 +68,18 @@
                     <div class="col-md-2">
                         Status
                         <div class="text-center">{{ad.status}}</div>
-                        <button class="btn btn-default">Deactivate</button>
+                        <a href="" ng-if="ad.status=='WaitingApproval' || ad.status=='Published'" class="btn btn-default col-md-12">Deactivate</a>
+                        <a href="#/user/ads/edit/{{ad.id}}" ng-if="ad.status=='Inactive'"
+                           class="btn btn-default col-md-12">Edit</a>
+                        <a href="" ng-if="ad.status=='Inactive'" ng-click="publishAgain(ad)"
+                           class="btn btn-default col-md-12">Publish Again</a>
+                        <a href="#/user/ads/delete/{{ad.id}}" ng-if="ad.status=='Inactive'"
+                           class="btn btn-default col-md-12">Delete</a>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div>
+        <div ng-show="areAdsLoaged">
             <div pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
                  items-per-page="pageSize" previous-text="‹" next-text="›"></div>
         </div>

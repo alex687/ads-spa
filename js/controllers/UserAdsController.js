@@ -2,24 +2,15 @@
 
 adsApp.controller('UserAdsController', function UserAdsController($scope, adsData, authorization, pageSize) {
     var params = {PageSize: pageSize};
+    $scope.areAdsLoaged = false;
 
-    $scope.filterByCategory = function (categoryId) {
-        params.categoryId = categoryId;
+    $scope.changeStatusFilter = function (status) {
+        params.status = status;
         loadAds(params);
     };
 
-    $scope.filterByTown = function (townId) {
-        params.townId = townId;
-        loadAds(params);
-    };
-
-    $scope.removeTownFiltration = function () {
-        delete  params['townId'];
-        loadAds(params);
-    };
-
-    $scope.removeCategoryFiltration = function () {
-        delete  params['categoryId'];
+    $scope.removeStatusFilter = function () {
+        delete  params['status'];
         loadAds(params);
     };
 
@@ -42,6 +33,7 @@ adsApp.controller('UserAdsController', function UserAdsController($scope, adsDat
     function loadAds(params) {
         adsData.getAllUerAds(params).$promise.then(function (data) {
             $scope.ads = data.ads;
+            $scope.areAdsLoaged = true;
             $scope.totalItems = data.numItems;
         });
     }

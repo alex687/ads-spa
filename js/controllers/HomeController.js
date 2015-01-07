@@ -2,6 +2,7 @@
 
 adsApp.controller('HomeController', function HomeController($scope, adsData, authorization, pageSize) {
     var params = {PageSize: pageSize};
+    $scope.areAdsLoaged = false;
 
     $scope.filterByCategory = function (categoryId) {
         params.categoryId = categoryId;
@@ -42,6 +43,7 @@ adsApp.controller('HomeController', function HomeController($scope, adsData, aut
     function loadAds(params) {
         adsData.getAllPublishedAds(params).success(function (data) {
             $scope.ads = data.ads;
+            $scope.areAdsLoaged = true;
             $scope.totalItems = data.numItems;
         });
     }
