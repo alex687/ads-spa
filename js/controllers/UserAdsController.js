@@ -1,15 +1,7 @@
 'use strict';
 
-adsApp.controller('MyAdsController', function HomeController($scope, adsData, authorization, pageSize) {
+adsApp.controller('UserAdsController', function UserAdsController($scope, adsData, authorization, pageSize) {
     var params = {PageSize: pageSize};
-
-    adsData.getAllCategories().success(function (data) {
-        $scope.categories = data;
-    });
-
-    adsData.getALlTowns().success(function (data) {
-        $scope.towns = data;
-    });
 
     $scope.filterByCategory = function (categoryId) {
         params.categoryId = categoryId;
@@ -31,16 +23,11 @@ adsApp.controller('MyAdsController', function HomeController($scope, adsData, au
         loadAds(params);
     };
 
-    $scope.totalItems = 64;
-    $scope.currentPage = 4;
-    $scope.maxSize = 5;
+    $scope.pageSize = pageSize;
 
-    $scope.setPage = function (pageNo) {
-        $scope.currentPage = pageNo;
-    };
-
-    $scope.pageChanged = function() {
-        $log.log('Page changed to: ' + $scope.currentPage);
+    $scope.pageChanged = function () {
+        params.StartPage = $scope.currentPage;
+        loadAds(params)
     };
 
     if (authorization.isLogged()) {
@@ -50,13 +37,14 @@ adsApp.controller('MyAdsController', function HomeController($scope, adsData, au
         $scope.menu = 'templates/guest-menu.html';
     }
 
-    $scope.$emit('changePageName',  'Home');
+    $scope.$emit('changePageName', 'My ads');
 
     function loadAds(params) {
-        adsData.getAllPublishedAds(params).success(function (data) {
+        adsData.getAllUerAds(params).$promise.then(function (data) {
             $scope.ads = data.ads;
-            console.log(data);
+            $scope.totalItems = data.numItems;
         });
     }
+
     loadAds(params);
 });

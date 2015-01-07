@@ -1,0 +1,83 @@
+<div class="row " ng-controller="UserAdsController">
+    <aside class="col-md-2">
+        <ng-include
+        ="'templates/logged-menu.html'></ng-include>
+
+        <section class="panel panel-default shadow">
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">My Ads</h2>
+        </div>
+        <div class="panel-body">
+            <div class="list-group">
+                <a href="#/" class="list-group-item">All</a>
+                <a href="#/user/ads/" class="list-group-item">Published</a>
+                <a href="#/user/ads/publish" class="list-group-item">Waiting Approval</a>
+                <a href="#/user/ads/publish" class="list-group-item">Rejected</a>
+            </div>
+        </div>
+        </section>
+    </aside>
+    <div class="col-md-10">
+        <div class="panel panel-default shadow" ng-repeat="ad in ads">
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-6"><h2 class="item-heading">{{ad.title}}</h2></div>
+                            <div class="col-md-3"><span class="item-date">{{ad.date | date: 'd-MMM-yyyy'}}</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 label label-default image-container" ng-switch on="ad.imageDataUrl">
+                                <img src="" ng-src="" ng-switch-when="null">
+                                <img src="" ng-src="{{ad.imageDataUrl}}" ng-switch-default>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{ad.text}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Name:
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ad.ownerName}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Email:
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ad.ownerEmail}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Tel:
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ad.ownerPhone}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        Status
+                        <div class="text-center">{{ad.status}}</div>
+                        <button class="btn btn-default">Deactivate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+                 items-per-page="pageSize" previous-text="‹" next-text="›"></div>
+        </div>
+    </div>
+</div>

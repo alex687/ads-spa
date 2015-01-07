@@ -27,8 +27,8 @@
                             </div>
                         </div>
 
-                        <div class="ad-img-container col-md-3">
-                            <img src="" class="image-box" alt="ad image" data-ng-src="{{ad.imageDataUrl}}"/>
+                        <div class="image-container col-md-3">
+                            <img src="" id="img-preview" alt="ad image"/>
                         </div>
                     </div>
 
@@ -37,9 +37,7 @@
                             <label class="col-md-1">Image: </label>
 
                             <div class="col-md-11">
-                                <div class="fileUpload btn form-btn">
-                                    <input type="file" class="upload-input"/>
-                                </div>
+                               <div browse-image preview="#img-preview" image="imageSetData"></div>
                             </div>
                         </div>
                     </div>
@@ -50,9 +48,8 @@
 
                             <div class="col-md-11">
                                 <select class="form-control" name="townsSelect" ng-model="ad.townId">
-                                    <option value="null" selected="selected">None</option>
-                                    <option data-ng-repeat="category in categories" value="{{category.id}}">
-                                        {{category.name}}
+                                    <option data-ng-repeat="town in towns" value="{{town.id}}">
+                                        {{town.name}}
                                     </option>
                                 </select>
                             </div>
@@ -65,7 +62,6 @@
 
                             <div class="col-md-11">
                                 <select name="categoriesSelect" class="form-control" ng-model="ad.categoryId">
-                                    <option value="null" selected="selected">None</option>
                                     <option data-ng-repeat="category in categories" value="{{category.id}}">
                                         {{category.name}}
                                     </option>
@@ -77,9 +73,9 @@
                     <div class="form-group pull-left col-md-12 col-sm-12 col-xs-12">
                         <div>
                             <button data-ng-click="publish(ad, adPublishForm)"
+                                    data-ng-disabled="adPublishForm.$invalid"
                                     class="btn btn-default col-md-4">Publish
                             </button>
-                            <a href="#/user/home" class="col-md-4 col-md-offset-1">Cancel</a>
                         </div>
                     </div>
                 </form>

@@ -14,17 +14,17 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return $http({method: 'GET', url: serviceBaseUrl + 'towns/'});
     }
 
-    var headers = authorization.getHeaders();
-
+    var headers = {'Authorization' :authorization.getHeaders()};
     var resource = $resource(
         'http://softuni-ads.azurewebsites.net/api/user/ads/:id',
         null,
         {
-            'save': {method: 'POST', headers: headers}
+            'save': {method: 'POST', headers: headers},
+            'get': {method: 'get', headers: headers}
         });
 
-    function getAllUerAds() {
-        return resource.get();
+    function getAllUerAds(params) {
+        return resource.get(params);
     }
 
     function createNewAd(ad) {

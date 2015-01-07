@@ -1,6 +1,5 @@
 adsApp.directive('categoriesSection', function () {
     return {
-
         scope: {},
         controller: function ($scope, adsData) {
             adsData.getAllCategories().success(function (categories) {

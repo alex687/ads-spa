@@ -3,16 +3,8 @@
 adsApp.controller('HomeController', function HomeController($scope, adsData, authorization, pageSize) {
     var params = {PageSize: pageSize};
 
-    adsData.getAllCategories().success(function (data) {
-        $scope.categories = data;
-    });
-
-    adsData.getALlTowns().success(function (data) {
-        $scope.towns = data;
-    });
-
     $scope.filterByCategory = function (categoryId) {
-       params.categoryId = categoryId;
+        params.categoryId = categoryId;
         loadAds(params);
     };
 
@@ -31,16 +23,11 @@ adsApp.controller('HomeController', function HomeController($scope, adsData, aut
         loadAds(params);
     };
 
-    $scope.totalItems = 64;
-    $scope.currentPage = 4;
-    $scope.maxSize = 5;
+    $scope.pageSize = pageSize;
 
-    $scope.setPage = function (pageNo) {
-        $scope.currentPage = pageNo;
-    };
-
-    $scope.pageChanged = function() {
-        $log.log('Page changed to: ' + $scope.currentPage);
+    $scope.pageChanged = function () {
+        params.StartPage = $scope.currentPage;
+        loadAds(params)
     };
 
     if (authorization.isLogged()) {
@@ -50,13 +37,14 @@ adsApp.controller('HomeController', function HomeController($scope, adsData, aut
         $scope.menu = 'templates/guest-menu.html';
     }
 
-    $scope.$emit('changePageName',  'Home');
+    $scope.$emit('changePageName', 'Home');
 
     function loadAds(params) {
         adsData.getAllPublishedAds(params).success(function (data) {
             $scope.ads = data.ads;
-            console.log(data);
+            $scope.totalItems = data.numItems;
         });
     }
+
     loadAds(params);
 });

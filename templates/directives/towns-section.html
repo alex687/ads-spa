@@ -1,0 +1,12 @@
+<section class="panel panel-default shadow">
+    <div class="panel-heading">
+        <h2 class="panel-title text-center">Towns</h2>
+    </div>
+    <div class="panel-body">
+        <div class="list-group">
+            <a href="#" ng-click="removeTownFiltration()" class="list-group-item"> All </a>
+            <a href="#" ng-click="filterByTown(town.id)"class="list-group-item" ng-repeat="town in towns">
+                {{town.name}} </a>
+        </div>
+    </div>
+</section>
