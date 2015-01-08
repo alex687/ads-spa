@@ -43,7 +43,7 @@
                         <label class="col-md-12" for="towns-select">Town: </label>
 
                         <div class="col-md-12">
-                            <select class="form-control" name="townsSelect" ng-model="ad.townId">
+                            <select class="form-control" name="townsSelect" ng-model="user.townId">
                                 <option data-ng-repeat="town in towns" value="{{town.id}}">
                                     {{town.name}}
                                 </option>
@@ -53,8 +53,8 @@
 
                     <div class="form-group pull-left col-md-12">
                         <div>
-                            <button ng-click="submit(ad, adPublishForm)"
-                                    ng-disabled="adPublishForm.$invalid"
+                            <button ng-click="editProfile(ad)"
+                                    ng-disabled="profileEdit.$invalid"
                                     class="btn btn-default col-md-4">
                                 Edit profile
                             </button>
@@ -104,8 +104,8 @@
 
                 <div class="form-group pull-left col-md-12">
                     <div>
-                        <button ng-click="submit(ad, adPublishForm)"
-                                ng-disabled="adPublishForm.$invalid"
+                        <button ng-click="changePassword(ad)"
+                                ng-disabled="passwordChange.$invalid"
                                 class="btn btn-default col-md-8">
                             Change password
                         </button>
