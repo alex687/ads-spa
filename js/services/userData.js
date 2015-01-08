@@ -1,4 +1,16 @@
-adsApp.factory('userData', function ($http, serviceBaseUrl) {
+adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
+    var baseUserUrl = serviceBaseUrl + 'user/';
+    var headers = {'Authorization': authorization.getHeaders()};
+    var resource = $resource(
+        baseUserUrl,
+        null,
+        {
+            'register': {url: baseUserUrl + 'register/', method: 'POST'},
+            'login': {url: baseUserUrl + 'login/', method: 'POST'},
+            'getProfile': {url: baseUserUrl + 'profile/', method: 'GET', headers: headers},
+            'editProfile': {url: baseUserUrl + 'profile/', method: 'PUT', headers: headers},
+            'changePassword': {url: baseUserUrl + 'profile/', method: 'PUT', headers: headers}
+        });
 
     function register(username, password, confirmPassword, name, email, phone, townId) {
         var data = {
@@ -13,20 +25,50 @@ adsApp.factory('userData', function ($http, serviceBaseUrl) {
             data.townId = townId;
         }
 
-        return $http.post(serviceBaseUrl + 'user/register/', data);
+        return resource.register(data);
     }
 
-    function login(username, password){
+    function login(username, password) {
         var data = {
             username: username,
-            password : password
+            password: password
         };
 
-        return $http.post(serviceBaseUrl + 'user/login/', data);
+        return resource.login(data);
+    }
+
+    function getProfile() {
+        return resource.getProfile();
+    }
+
+    function editProfile(name, email, phone, townId) {
+        var data = {
+            name: name,
+            email: email,
+            phone: phone
+        };
+        if (townId) {
+            data.townId = townId;
+        }
+
+        return resource.editProfile(data);
+    }
+
+    function changePassword(oldPassword, newPassword, confirmPassword) {
+        var data = {
+            oldPassword: oldPassword,
+            newPassword: newPassword,
+            confirmPassword: confirmPassword
+        };
+
+        return resource.changePassword(data);
     }
 
     return {
         register: register,
-        login: login
+        login: login,
+        getProfile: getProfile,
+        editProfile: editProfile,
+        changePassword: changePassword
     }
 });

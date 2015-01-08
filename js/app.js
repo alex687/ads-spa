@@ -23,6 +23,16 @@ var adsApp = angular
                     }
                 }
             })
+            .state('logout', {
+                url: "/logout",
+                controller: 'LogoutController',
+                data: {
+                    permissions: {
+                        except: ['anonymous'],
+                        redirectTo: 'login'
+                    }
+                }
+            })
             .state('register', {
                 url: "/register",
                 templateUrl: "templates/register.html",
@@ -53,7 +63,8 @@ var adsApp = angular
                         redirectTo: 'login'
                     }
                 }
-            }).state('user-ad-edit', {
+            })
+            .state('user-ad-edit', {
                 url: "/user/ads/edit/:adId",
                 templateUrl: "templates/publish-ad.html",
                 controller: 'EditAdController',

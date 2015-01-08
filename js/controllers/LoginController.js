@@ -5,11 +5,11 @@ adsApp.controller('LoginController', function LoginController($scope, userData, 
     $scope.registerAlert = false;
 
     $scope.login = function (user) {
-        userData.login(user.username, user.password).success(function (data) {
+        userData.login(user.username, user.password).$promise.then(function (data) {
             $scope.registerAlert = false;
             authorization.saveCredentials(data);
             $state.go('home');
-        }).error(function (data) {
+        }, function (data) {
             $scope.registerAlert = true;
             $scope.alertMessage = data.error_description
         });

@@ -16,12 +16,15 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
 
     var headers = {'Authorization' :authorization.getHeaders()};
     var resource = $resource(
-        'http://softuni-ads.azurewebsites.net/api/user/ads/:id',
+        serviceBaseUrl +'user/ads/:id',
         null,
         {
             'save': {method: 'POST', headers: headers},
             'get': {method: 'GET', headers: headers},
             'update': {method: 'PUT', headers: headers},
+            'delete': {method: 'DELETE', headers: headers},
+            'deactivate': {url: serviceBaseUrl + 'user/ads/deactivate/:id', method: 'PUT', params: {id: '@id'}, headers: headers},
+            'publishAgain': {url: serviceBaseUrl + 'user/ads/publishAgain/:id', method: 'PUT', params: {id: '@id'}, headers: headers}
         });
 
     function getAllUerAds(params) {
@@ -44,6 +47,13 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return resource.delete({id: id});
     }
 
+    function deactivateAd(id){
+        return resource.deactivate({id: id});
+    }
+
+    function publishAgain(id){
+        return resource.publishAgain({id: id});
+    }
 
     return {
         getAllPublishedAds: getAllPublishedAds,
@@ -53,6 +63,8 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         createNewAd: createNewAd,
         getAdById: getAdById,
         editAd: editAd,
-        deleteAd: deleteAd
+        deleteAd: deleteAd,
+        deactivateAd : deactivateAd,
+        publishAgain: publishAgain
     }
 });

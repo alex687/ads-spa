@@ -4,7 +4,8 @@ adsApp.controller('EditAdController', function PublishAdController($scope, adsDa
     $scope.showAlert = false;
     $scope.showSucces = false;
     $scope.showForm = false;
-    $scope.ad = {imageDataUrl: 'img/no-image.PNG'};
+    $scope.ad = {};
+    $scope.imageDataUrl = 'img/no-image.PNG';
 
     adsData.getAllCategories().success(function (categories) {
         $scope.categories = categories;
@@ -14,8 +15,9 @@ adsApp.controller('EditAdController', function PublishAdController($scope, adsDa
         $scope.towns = towns;
     });
 
-    adsData.getAdById($stateParams.adId).$promise.then(function(ad){
+    adsData.getAdById($stateParams.adId).$promise.then(function (ad) {
         $scope.ad = ad;
+        $scope.imageDataUrl = ad.imageDataUrl;
         $scope.showForm = true;
     });
 
@@ -30,11 +32,11 @@ adsApp.controller('EditAdController', function PublishAdController($scope, adsDa
         });
     };
 
-    $scope.imageSetData = function(imageData){
+    $scope.imageSetData = function (imageData) {
         $scope.ad.imageDataUrl = imageData;
     };
 
     $scope.pageName = 'Edit Ad';
-    $scope.buttonSubmitText= 'Edit';
+    $scope.buttonSubmitText = 'Edit';
     $scope.$emit('changePageName', $scope.pageName);
 });

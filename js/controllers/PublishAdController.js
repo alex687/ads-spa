@@ -1,10 +1,11 @@
 'use strict';
 
 adsApp.controller('PublishAdController', function PublishAdController($scope, adsData) {
-    $scope.publishAdAlert = false;
-    $scope.publishAdSuccess = false;
+    $scope.showAlert = false;
+    $scope.showSucces = false;
     $scope.showForm = true;
-    $scope.ad = {imageDataUrl: 'img/no-image.PNG'};
+    $scope.ad = {};
+    $scope.imageDataUrl = 'img/no-image.PNG';
 
     adsData.getAllCategories().success(function (categories) {
         $scope.categories = categories;
@@ -17,7 +18,7 @@ adsApp.controller('PublishAdController', function PublishAdController($scope, ad
     $scope.submit = function (ad) {
         adsData.createNewAd(ad).$promise.then(function (data) {
             $scope.publishAdAlert = false;
-            $scope.publishAdSuccess = true;
+            $scope.showSucces = true;
             $scope.successMessage = data.message;
         }, function (data) {
             $scope.publishAdAlert = true;

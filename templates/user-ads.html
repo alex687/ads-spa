@@ -28,7 +28,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-2 label label-default image-container" ng-switch on="ad.imageDataUrl">
-                                <img src="" ng-src="" ng-switch-when="null">
+                                <img src="img/no-image.PNG" ng-src="" ng-switch-when="null">
                                 <img src="" ng-src="{{ad.imageDataUrl}}" ng-switch-default>
                             </div>
                             <div class="col-md-6">
@@ -68,7 +68,7 @@
                     <div class="col-md-2">
                         Status
                         <div class="text-center">{{ad.status}}</div>
-                        <a href="" ng-if="ad.status=='WaitingApproval' || ad.status=='Published'" class="btn btn-default col-md-12">Deactivate</a>
+                        <a href="" ng-if="ad.status=='WaitingApproval' || ad.status=='Published'" class="btn btn-default col-md-12" ng-click="deactivate(ad)">Deactivate</a>
                         <a href="#/user/ads/edit/{{ad.id}}" ng-if="ad.status=='Inactive'"
                            class="btn btn-default col-md-12">Edit</a>
                         <a href="" ng-if="ad.status=='Inactive'" ng-click="publishAgain(ad)"

@@ -21,6 +21,21 @@ adsApp.controller('UserAdsController', function UserAdsController($scope, adsDat
         loadAds(params)
     };
 
+    $scope.deactivate = function (ad) {
+        adsData.deactivateAd(ad.id).$promise.then(function (data) {
+            ad.status = 'Inactive';
+        }, function (data) {
+        });
+    };
+
+    $scope.publishAgain = function (ad) {
+        adsData.publishAgain(ad.id).$promise.then(function (data) {
+            ad.status = 'WaitingApproval';
+        }, function (data) {
+        });
+    };
+
+
     if (authorization.isLogged()) {
         $scope.menu = 'templates/logged-menu.html';
     }
