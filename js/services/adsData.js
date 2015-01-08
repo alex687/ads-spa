@@ -20,7 +20,8 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         null,
         {
             'save': {method: 'POST', headers: headers},
-            'get': {method: 'get', headers: headers}
+            'get': {method: 'GET', headers: headers},
+            'update': {method: 'PUT', headers: headers},
         });
 
     function getAllUerAds(params) {

@@ -1,12 +1,12 @@
-<div class="row" ng-controller="PublishAdController">
+<div class="row">
     <aside class="col-md-2" ng-include="'templates/logged-menu.html'">
     </aside>
     <div class="col-md-10">
-        <div class="alert alert-warning" role="alert" ng-show="publishAdAlert">{{alertMessage}}</div>
-        <div class="alert alert-success" role="alert" ng-show="publishAdSuccess">{{successMessage}}</div>
-        <div class="panel panel-default shadow">
+        <div class="alert alert-warning" role="alert" ng-show="showAlert">{{alertMessage}}</div>
+        <div class="alert alert-success" role="alert" ng-show="showSucces">{{successMessage}}</div>
+        <div class="panel panel-default shadow" ng-show="showForm">
             <div class="panel-heading">
-                <h2 class="panel-title text-center">Publish New Ad</h2>
+                <h2 class="panel-title text-center">{{pageName}}</h2>
             </div>
             <div class="panel-body">
                 <form name="adPublishForm">
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="image-container col-md-3">
-                            <img src="img/no-image.PNG" id="img-preview" alt="ad image"/>
+                            <img src="{{ad.imageDataUrl}}" id="img-preview" alt="ad image"/>
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
                             <label class="col-md-1">Image: </label>
 
                             <div class="col-md-11">
-                               <div browse-image preview="#img-preview" image="imageSetData"></div>
+                                <div browse-image preview="#img-preview" image="imageSetData"></div>
                             </div>
                         </div>
                     </div>
@@ -73,9 +73,9 @@
 
                     <div class="form-group pull-left col-md-12 col-sm-12 col-xs-12">
                         <div>
-                            <button data-ng-click="publish(ad, adPublishForm)"
-                                    data-ng-disabled="adPublishForm.$invalid"
-                                    class="btn btn-default col-md-4">Publish
+                            <button ng-click="submit(ad, adPublishForm)"
+                                    ng-disabled="adPublishForm.$invalid"
+                                    class="btn btn-default col-md-4">{{buttonSubmitText}}
                             </button>
                         </div>
                     </div>

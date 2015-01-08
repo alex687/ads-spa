@@ -1,0 +1,57 @@
+<div class="row" ng-controller="DeleteAdController">
+    <aside class="col-md-2" ng-include="'templates/logged-menu.html'">
+    </aside>
+    <div class="col-md-10">
+        <div class="alert alert-warning" role="alert" ng-show="showAlert">{{alertMessage}}</div>
+        <div class="alert alert-success" role="alert" ng-show="showSucces">{{successMessage}}</div>
+        <div class="panel panel-default shadow" ng-show="showForm">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center">{{pageName}}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-9"><h2 class="item-heading">{{ad.title}}</h2></div>
+                    <div class="col-md-3"><span class="item-date">{{ad.date | date: 'd-MMM-yyyy'}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 label label-default image-container" ng-switch on="ad.imageDataUrl">
+                        <img src="img/no-image.PNG" ng-switch-when="null">
+                        <img src="" ng-src="{{ad.imageDataUrl}}" ng-switch-default>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ad.text}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                Name:
+                            </div>
+                            <div class="col-md-10">
+                                {{ad.ownerName}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                Email:
+                            </div>
+                            <div class="col-md-10">
+                                {{ad.ownerEmail}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                Tel:
+                            </div>
+                            <div class="col-md-10">
+                                {{ad.ownerPhone}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

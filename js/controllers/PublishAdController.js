@@ -3,8 +3,9 @@
 adsApp.controller('PublishAdController', function PublishAdController($scope, adsData) {
     $scope.publishAdAlert = false;
     $scope.publishAdSuccess = false;
+    $scope.showForm = true;
+    $scope.ad = {imageDataUrl: 'img/no-image.PNG'};
 
-    $scope.ad = {};
     adsData.getAllCategories().success(function (categories) {
         $scope.categories = categories;
     });
@@ -13,12 +14,11 @@ adsApp.controller('PublishAdController', function PublishAdController($scope, ad
         $scope.towns = towns;
     });
 
-    $scope.publish = function (ad) {
+    $scope.submit = function (ad) {
         adsData.createNewAd(ad).$promise.then(function (data) {
             $scope.publishAdAlert = false;
             $scope.publishAdSuccess = true;
             $scope.successMessage = data.message;
-            $state.go('home');
         }, function (data) {
             $scope.publishAdAlert = true;
             $scope.alertMessage = data.error_description
@@ -29,5 +29,7 @@ adsApp.controller('PublishAdController', function PublishAdController($scope, ad
         $scope.ad.imageDataUrl = imageData;
     };
 
-    $scope.$emit('changePageName', 'Publish new Ad');
+    $scope.pageName = 'Publish new Ad';
+    $scope.buttonSubmitText= 'Publish';
+    $scope.$emit('changePageName', $scope.pageName);
 });

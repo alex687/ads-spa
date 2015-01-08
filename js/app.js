@@ -36,6 +36,7 @@ var adsApp = angular
             .state('publish', {
                 url: "/user/ads/publish",
                 templateUrl: "templates/publish-ad.html",
+                controller: 'PublishAdController',
                 data: {
                     permissions: {
                         except: ['anonymous'],
@@ -52,9 +53,20 @@ var adsApp = angular
                         redirectTo: 'login'
                     }
                 }
-            })    .state('user-ad-edit', {
-                url: "#/user/ads/edit/{{ad.id:integer}}",
-                templateUrl: "templates/edit-ad.html",
+            }).state('user-ad-edit', {
+                url: "/user/ads/edit/:adId",
+                templateUrl: "templates/publish-ad.html",
+                controller: 'EditAdController',
+                data: {
+                    permissions: {
+                        except: ['anonymous'],
+                        redirectTo: 'login'
+                    }
+                }
+            })
+            .state('user-ad-delete', {
+                url: "/user/ads/delete/:adId",
+                templateUrl: "templates/delete-ad.html",
                 data: {
                     permissions: {
                         except: ['anonymous'],

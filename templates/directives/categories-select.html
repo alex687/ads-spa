@@ -1,0 +1,5 @@
+<select name="categoriesSelect" class="form-control" ng-model="ad.categoryId">
+    <option data-ng-repeat="category in categories" value="{{category.id}}">
+        {{category.name}}
+    </option>
+</select>
