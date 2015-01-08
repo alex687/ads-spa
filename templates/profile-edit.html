@@ -1,73 +1,53 @@
 <div class="row" ng-controller="UserProfileEdit">
     <aside class="col-md-2" ng-include="'templates/logged-menu.html'">
     </aside>
-    <div class="col-md-7">
+    <div class="col-md-6">
         <div class="alert alert-warning" role="alert" ng-show="showAlert">{{alertMessage}}</div>
         <div class="alert alert-success" role="alert" ng-show="showSucces">{{successMessage}}</div>
-        <div class="panel panel-default shadow" ng-show="showForm">
+        <div class="panel panel-default shadow">
             <div class="panel-heading">
                 <h2 class="panel-title text-center">{{pageName}}</h2>
             </div>
             <div class="panel-body">
                 <form name="profileEdit">
-                    <div class="row">
-                        <div class="form-group col-md-9">
-                            <label class="col-md-1" for="ad-title">Title: </label>
+                    <div class="row form-group">
+                        <label class="col-md-12" for="user-name">Name: </label>
 
-                            <div class="col-md-11">
-                                <input type="text" ng-model="ad.title" required="required" id="ad-title"
-                                       class="form-control"
-                                       placeholder="Title"/>
-                            </div>
-
-                            <label class="col-md-1" for="ad-text">Text: </label>
-
-                            <div class="col-md-11">
-                                <textarea class="form-control col-md-10" required="required" ng-model="ad.text"
-                                          name="adTextArea" id="ad-text" cols="40" rows="5"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="image-container col-md-3">
-                            <img src="{{imageDataUrl}}" id="img-preview" alt="ad image"/>
+                        <div class="col-md-12">
+                            <input type="text" ng-model="user.name" required="required" id="user-name"
+                                   class="form-control"/>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label class="col-md-1">Image: </label>
+                    <div class="row form-group">
+                        <label class="col-md-12" for="user-email">Email: </label>
 
-                            <div class="col-md-11">
-                                <div browse-image preview="#img-preview" image="imageSetData"></div>
-                            </div>
+                        <div class="col-md-12">
+                            <input type="text" ng-model="user.email" required="required" id="user-email"
+                                   class="form-control"/>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label class="col-md-1" for="towns-select">Town: </label>
+                    <div class="row form-group">
 
-                            <div class="col-md-11">
-                                <select class="form-control" name="townsSelect" ng-model="ad.townId">
-                                    <option data-ng-repeat="town in towns" value="{{town.id}}">
-                                        {{town.name}}
-                                    </option>
-                                </select>
-                            </div>
+                        <label class="col-md-12" for="user-phone">Phone:</label>
+
+                        <div class="col-md-12">
+                            <input type="text" ng-model="user.phone" required="required" id="user-phone"
+                                   class="form-control"/>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label class="col-md-1" for="categories-select">Category: </label>
 
-                            <div class="col-md-11">
-                                <select name="categoriesSelect" class="form-control" ng-model="ad.categoryId">
-                                    <option data-ng-repeat="category in categories" value="{{category.id}}">
-                                        {{category.name}}
-                                    </option>
-                                </select>
-                            </div>
+                    <div class="row form-group">
+                        <label class="col-md-12" for="towns-select">Town: </label>
+
+                        <div class="col-md-12">
+                            <select class="form-control" name="townsSelect" ng-model="ad.townId">
+                                <option data-ng-repeat="town in towns" value="{{town.id}}">
+                                    {{town.name}}
+                                </option>
+                            </select>
                         </div>
                     </div>
 
@@ -75,96 +55,65 @@
                         <div>
                             <button ng-click="submit(ad, adPublishForm)"
                                     ng-disabled="adPublishForm.$invalid"
-                                    class="btn btn-default col-md-4">{{buttonSubmitText}}
+                                    class="btn btn-default col-md-4">
+                                Edit profile
                             </button>
                         </div>
                     </div>
                 </form>
-            </div>
         </div>
-
     </div>
-    <div class="col-md-3">
-        <div class="alert alert-warning" role="alert" ng-show="showAlert">{{alertMessage}}</div>
-        <div class="alert alert-success" role="alert" ng-show="showSucces">{{successMessage}}</div>
-        <div class="panel panel-default shadow" ng-show="showForm">
-            <div class="panel-heading">
-                <h2 class="panel-title text-center">{{pageName}}</h2>
-            </div>
-            <div class="panel-body">
-                <form name="passwordEdit">
-                    <div class="row">
-                        <div class="form-group col-md-9">
-                            <label class="col-md-1" for="ad-title">Title: </label>
 
-                            <div class="col-md-11">
-                                <input type="text" ng-model="ad.title" required="required" id="ad-title"
-                                       class="form-control"
-                                       placeholder="Title"/>
-                            </div>
-
-                            <label class="col-md-1" for="ad-text">Text: </label>
-
-                            <div class="col-md-11">
-                                <textarea class="form-control col-md-10" required="required" ng-model="ad.text"
-                                          name="adTextArea" id="ad-text" cols="40" rows="5"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="image-container col-md-3">
-                            <img src="{{imageDataUrl}}" id="img-preview" alt="ad image"/>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label class="col-md-1">Image: </label>
-
-                            <div class="col-md-11">
-                                <div browse-image preview="#img-preview" image="imageSetData"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label class="col-md-1" for="towns-select">Town: </label>
-
-                            <div class="col-md-11">
-                                <select class="form-control" name="townsSelect" ng-model="ad.townId">
-                                    <option data-ng-repeat="town in towns" value="{{town.id}}">
-                                        {{town.name}}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label class="col-md-1" for="categories-select">Category: </label>
-
-                            <div class="col-md-11">
-                                <select name="categoriesSelect" class="form-control" ng-model="ad.categoryId">
-                                    <option data-ng-repeat="category in categories" value="{{category.id}}">
-                                        {{category.name}}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group pull-left col-md-12">
-                        <div>
-                            <button ng-click="submit(ad, adPublishForm)"
-                                    ng-disabled="adPublishForm.$invalid"
-                                    class="btn btn-default col-md-4">{{buttonSubmitText}}
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+</div>
+<div class="col-md-4">
+    <div class="alert alert-warning" role="alert" ng-show="showAlert">{{alertMessage}}</div>
+    <div class="alert alert-success" role="alert" ng-show="showSucces">{{successMessage}}</div>
+    <div class="panel panel-default shadow">
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">{{pageName}}</h2>
         </div>
+        <div class="panel-body">
+            <form name="passwordChange">
+                <div class="row form-group">
+                    <label class="col-md-12" for="user-old-password">Old Password: </label>
 
+                    <div class="col-md-12">
+                        <input type="password" ng-model="user.oldPassword" required="required" id="user-old-password"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-md-12" for="user-new-password">New Password: </label>
+
+                    <div class="col-md-12">
+                        <input type="password" ng-model="user.newPassword" required="required" id="user-new-password"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+
+                    <label class="col-md-12" for="user-confirm-password">Confirm Password:</label>
+
+                    <div class="col-md-12">
+                        <input type="password" ng-model="user.confirmPassword" required="required" id="user-confirm-password"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group pull-left col-md-12">
+                    <div>
+                        <button ng-click="submit(ad, adPublishForm)"
+                                ng-disabled="adPublishForm.$invalid"
+                                class="btn btn-default col-md-8">
+                            Change password
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
+
+</div>
 </div>
