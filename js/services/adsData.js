@@ -55,6 +55,24 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return resource.publishAgain({id: id});
     }
 
+    var adminResource = $resource(serviceBaseUrl + 'admin/', null , {
+        'getAllAds': {url: serviceBaseUrl + 'admin/Ads', method: 'GET', headers: headers},
+        'approveAd': {url: serviceBaseUrl + 'admin/Ads/Approve/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
+        'rejectAd': {url: serviceBaseUrl + 'admin/Ads/Reject/:id', params: {id: '@id'}, method: 'PUT', headers: headers}
+    });
+
+    function getAllAds(params){
+        return adminResource.getAllAds(params);
+    }
+
+    function approveAd(id){
+        return adminResource.approveAd({id: id});
+    }
+
+    function rejectAd(id){
+        return adminResource.rejectAd({id: id});
+    }
+
     return {
         getAllPublishedAds: getAllPublishedAds,
         getALlTowns: getAllTowns,
@@ -64,6 +82,11 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         getAdById: getAdById,
         editAd: editAd,
         deleteAd: deleteAd,
-        deactivateAd : deactivateAd
+        deactivateAd : deactivateAd,
+        admin: {
+            getAllAds: getAllAds,
+            approveAd: approveAd,
+            rejectAd: rejectAd
+        }
     }
 });
