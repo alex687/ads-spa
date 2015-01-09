@@ -51,7 +51,9 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return resource.deactivate({id: id});
     }
 
-    function publishAgain(id){}
+    function publishAgain(id){
+        return resource.publishAgain({id: id});
+    }
 
     return {
         getAllPublishedAds: getAllPublishedAds,

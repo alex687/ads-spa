@@ -37,3 +37,10 @@ input.ng-dirty.ng-invalid {
 input.ng-dirty.ng-valid.validity {
     background-color: darkseagreen; !important
 }
+
+.info {
+    background-color: #c5e0b4;
+    border: #a9d18e dotted 2px;
+    padding: 5px;
+    margin-bottom: 5px;
+}

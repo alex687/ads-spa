@@ -1,10 +1,9 @@
 adsApp.factory('authorization', function ($q, ipCookie) {
 
-
     function saveCredentials(credentials) {
         ipCookie('access_token', credentials.access_token, { expires: credentials.expires_in, expirationUnit: 'seconds', path: '/'});
         ipCookie('username', credentials.username, { expires: credentials.expires_in, expirationUnit: 'seconds', path: '/'});
-        ipCookie('admin', credentials.admin, { expires: credentials.expires_in, expirationUnit: 'seconds', path: '/'});
+        ipCookie('admin', credentials.isAdmin, { expires: credentials.expires_in, expirationUnit: 'seconds', path: '/'});
     }
 
     function isLogged() {
@@ -23,7 +22,7 @@ adsApp.factory('authorization', function ($q, ipCookie) {
 
     function isAdmin(){
         if(isUser()){
-            if(ipCookie('admin') == 'true'){
+            if(ipCookie('admin') == true){
                 return true;
             }
         }

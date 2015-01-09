@@ -95,6 +95,17 @@ var adsApp = angular
                     }
                 }
             })
+
+            .state('admin-home', {
+                url: "/admin/home",
+                templateUrl: "templates/admin/home.html",
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: 'home'
+                    }
+                }
+            })
     })
     .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')
     .constant('pageSize', 5)
