@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.controller('AdminHomeController', function AdminHomeController($scope, adsData, authorization, pageSize) {
+adsApp.controller('AdminHomeController', function AdminHomeController($scope, adsData, pageSize) {
     var params = {PageSize: pageSize};
     $scope.areAdsLoaged = false;
 
@@ -31,10 +31,22 @@ adsApp.controller('AdminHomeController', function AdminHomeController($scope, ad
         loadAds(params)
     };
 
-    $scope.$emit('changePageName', 'Home');
+    $scope.approve = function (ad) {
+        adsData.admin.approveAd(ad.id).$promise.then(function () {
+            ad.status = 'Published';
+        });
+    };
+
+    $scope.reject = function (ad) {
+        adsData.admin.rejectAd(ad.id).$promise.then(function () {
+            ad.status = 'Inactive';
+        });
+    };
+
+    $scope.$emit('changePageName', 'Admin Home');
 
     function loadAds(params) {
-        adsData.getAllPublishedAds(params).success(function (data) {
+        adsData.admin.getAllAds(params).$promise.then(function (data) {
             $scope.ads = data.ads;
             $scope.areAdsLoaged = true;
             $scope.totalItems = data.numItems;

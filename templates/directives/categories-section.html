@@ -4,10 +4,10 @@
     </div>
     <div class="panel-body">
         <div class="list-group">
-            <a href="#" ng-click="removeCategoryFiltration()" class="list-group-item"> All </a>
-            <a href="#" ng-click="filterByCategory(category.id)" class="list-group-item"
+            <span ng-click="removeCategoryFiltration()" class="list-group-item"> All </span>
+            <span href="#" ng-click="filterByCategory(category.id)" class="list-group-item"
                ng-repeat="category in categories">
-                {{category.name}} </a>
+                {{category.name}} </span>
         </div>
     </div>
 </section>
