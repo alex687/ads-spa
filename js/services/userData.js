@@ -45,7 +45,7 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
         var data = {
             name: name,
             email: email,
-            phone: phone
+            phoneNumber: phone
         };
         if (townId) {
             data.townId = townId;
