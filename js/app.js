@@ -98,7 +98,15 @@ var adsApp = angular
     })
     .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')
     .constant('pageSize', 5)
-    .run(function (Permission, authorization) {
+    .run(function (Permission, authorization, $http) {
+
+        $http.defaults.transformRequest.push(function (data, headersGetter) {
+            var currentHeaders = headersGetter();
+            if (currentHeaders.Authorization) {
+                currentHeaders.Authorization = authorization.getHeaders();
+            }
+            return data;
+        });
 
         Permission.defineRole('anonymous', function (stateParams) {
             return !authorization.isUser();

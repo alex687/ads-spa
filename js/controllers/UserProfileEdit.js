@@ -29,4 +29,7 @@ adsApp.controller('UserProfileEdit', function UserProfileEdit($scope, userData, 
     adsData.getALlTowns().success(function (data) {
         $scope.towns = data;
     });
+
+    $scope.$emit('changePageName', 'Edit profile');
+
 });
