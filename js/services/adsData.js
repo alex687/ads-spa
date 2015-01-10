@@ -110,6 +110,18 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return adminResource.createTown({name: name});
     }
 
+    function adminSaveTownData(town) {
+        localStorage.setItem('town_data', JSON.stringify(town));
+    }
+
+    function adminGetTownData() {
+        return JSON.parse(localStorage.getItem('town_data'));
+    }
+
+    function adminRemoveTownData(){
+        localStorage.removeItem('town_data');
+    }
+
     return {
         getAllPublishedAds: getAllPublishedAds,
         getALlTowns: getAllTowns,
@@ -129,7 +141,10 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
             deleteAd: adminDeleteAd,
             towns: {
                 getAll: adminGetAllTowns,
-                create: adminCreateTown
+                create: adminCreateTown,
+                getTown: adminGetTownData,
+                saveTownData : adminSaveTownData,
+                removeTownData : adminRemoveTownData
             }
         }
     }

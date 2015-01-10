@@ -182,7 +182,7 @@ var adsApp = angular
             }).state('admin-towns-edit', {
                 url: "/admin/towns/create",
                 templateUrl: "templates/admin/towns-categories-create-edit.html",
-                controller: 'AdminTownCreateController',
+                controller: 'AdminTownEditController',
                 data: {
                     permissions: {
                         only: ['admin'],
