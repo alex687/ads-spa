@@ -55,13 +55,16 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return resource.publishAgain({id: id});
     }
 
+
+    var baseAdminUrl =  serviceBaseUrl + 'admin/';
     var adminResource = $resource(serviceBaseUrl + 'admin/', null , {
-        'getAllAds': {url: serviceBaseUrl + 'admin/Ads', method: 'GET', headers: headers},
-        'approveAd': {url: serviceBaseUrl + 'admin/Ads/Approve/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
-        'rejectAd': {url: serviceBaseUrl + 'admin/Ads/Reject/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
-        'getAd': {url: serviceBaseUrl + 'admin/Ads/:id', params: {id: '@id'}, method: 'GET', headers: headers},
-        'editAd': {url: serviceBaseUrl + 'admin/Ads/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
-        'deleteAd': {url: serviceBaseUrl + 'admin/Ads/:id', params: {id: '@id'}, method: 'DELETE', headers: headers}
+        'getAllAds': {url:baseAdminUrl + 'Ads', method: 'GET', headers: headers},
+        'approveAd': {url: baseAdminUrl + 'Ads/Approve/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
+        'rejectAd': {url: baseAdminUrl + 'Ads/Reject/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
+        'getAd': {url: baseAdminUrl + 'Ads/:id', params: {id: '@id'}, method: 'GET', headers: headers},
+        'editAd': {url: baseAdminUrl + 'Ads/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
+        'deleteAd': {url: baseAdminUrl + 'Ads/:id', params: {id: '@id'}, method: 'DELETE', headers: headers},
+        'getAllTowns': {url: baseAdminUrl + 'Towns/', method: 'GET', headers: headers}
     });
 
     function getAllAds(params){
@@ -88,6 +91,10 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return adminResource.deleteAd({id: id});
     }
 
+    function adminGetAllTowns(params){
+        return adminResource.getAllTowns(params);
+    }
+
     return {
         getAllPublishedAds: getAllPublishedAds,
         getALlTowns: getAllTowns,
@@ -104,7 +111,10 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
             rejectAd: rejectAd,
             editAd: adminEditAd,
             getAd: adminGetAd,
-            deleteAd: adminDeleteAd
+            deleteAd: adminDeleteAd,
+            towns:{
+                getAll: adminGetAllTowns
+            }
         }
     }
 });

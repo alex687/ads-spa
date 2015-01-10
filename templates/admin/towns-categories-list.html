@@ -1,0 +1,29 @@
+<div class="row">
+    <aside class="col-md-2" ng-include="'templates/admin/menu.html'">
+    </aside>
+    <div class="col-md-10">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th ng-click="sort('id')">Id</th>
+                    <th ng-click="sort('Name')">Name</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in items">
+                    <td>{{item.username}}</td>
+                    <td>{{item.name}}</td>
+                    <td><span ng-click="forEdit(user)">Edit</span> <span ng-click="forDelete(user)">Delete</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="areUsersLoaged">
+            <div pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+                 items-per-page="pageSize" previous-text="‹" next-text="›" max-size="15" ></div>
+        </div>
+    </div>
+
+</div>
