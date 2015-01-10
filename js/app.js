@@ -108,9 +108,20 @@ var adsApp = angular
             })
 
 
-            .state('admin-edit', {
+            .state('admin-edit-ad', {
                 url: "/admin/ads/edit/:adId",
                 templateUrl: "templates/admin/edit-ad.html",
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: 'home'
+                    }
+                }
+            })
+
+            .state('admin-delete-ad', {
+                url: "/admin/ads/delete/:adId",
+                templateUrl: "templates/admin/delete-ad.html",
                 data: {
                     permissions: {
                         only: ['admin'],

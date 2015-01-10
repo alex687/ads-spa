@@ -60,7 +60,8 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         'approveAd': {url: serviceBaseUrl + 'admin/Ads/Approve/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
         'rejectAd': {url: serviceBaseUrl + 'admin/Ads/Reject/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
         'getAd': {url: serviceBaseUrl + 'admin/Ads/:id', params: {id: '@id'}, method: 'GET', headers: headers},
-        'editAd': {url: serviceBaseUrl + 'admin/Ads/:id', params: {id: '@id'}, method: 'PUT', headers: headers}
+        'editAd': {url: serviceBaseUrl + 'admin/Ads/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
+        'deleteAd': {url: serviceBaseUrl + 'admin/Ads/:id', params: {id: '@id'}, method: 'DELETE', headers: headers}
     });
 
     function getAllAds(params){
@@ -83,6 +84,10 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return adminResource.getAd({id: id});
     }
 
+    function adminDeleteAd(id){
+        return adminResource.deleteAd({id: id});
+    }
+
     return {
         getAllPublishedAds: getAllPublishedAds,
         getALlTowns: getAllTowns,
@@ -98,7 +103,8 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
             approveAd: approveAd,
             rejectAd: rejectAd,
             editAd: adminEditAd,
-            getAd: adminGetAd
+            getAd: adminGetAd,
+            deleteAd: adminDeleteAd
         }
     }
 });
