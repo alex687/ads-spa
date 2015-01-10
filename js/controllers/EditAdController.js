@@ -1,8 +1,6 @@
 'use strict';
 
 adsApp.controller('EditAdController', function PublishAdController($scope, adsData, $stateParams) {
-    $scope.showAlert = false;
-    $scope.showSucces = false;
     $scope.showForm = false;
     $scope.ad = {};
     $scope.imageDataUrl = 'img/no-image.PNG';
@@ -23,17 +21,35 @@ adsApp.controller('EditAdController', function PublishAdController($scope, adsDa
 
     $scope.submit = function (ad) {
         adsData.editAd($stateParams.adId, ad).$promise.then(function (data) {
-            $scope.showAlert = false;
-            $scope.showSucces = true;
-            $scope.successMessage = data.message;
+            $scope.$emit('showSuccess', data.message);
+            ad.changeImage = false;
         }, function (data) {
-            $scope.showAlert = true;
-            $scope.alertMessage = data.error_description
+            $scope.$emit('showAlert', data.error_description);
         });
     };
 
+    $scope.deleteImage = function (ad) {
+        var oldImageDataUrl = ad.imageDataUrl;
+        delete ad.imageDataUrl;
+        ad.changeImage = true;
+
+        adsData.editAd($stateParams.adId, ad).$promise.then(function (data) {
+            $scope.$emit('showSuccess', data.message);
+
+            $scope.imageDataUrl = 'img/no-image.PNG';
+            ad.changeImage = false;
+        }, function (data) {
+            $scope.$emit('showAlert', data.error_description);
+
+            ad.imageDataUrl = oldImageDataUrl;
+            ad.changeImage = false;
+        });
+    };
+
+
     $scope.imageSetData = function (imageData) {
         $scope.ad.imageDataUrl = imageData;
+        ad.changeImage = true;
     };
 
     $scope.pageName = 'Edit Ad';

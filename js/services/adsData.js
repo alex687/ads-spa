@@ -59,8 +59,8 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         'getAllAds': {url: serviceBaseUrl + 'admin/Ads', method: 'GET', headers: headers},
         'approveAd': {url: serviceBaseUrl + 'admin/Ads/Approve/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
         'rejectAd': {url: serviceBaseUrl + 'admin/Ads/Reject/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
-        'getAd': {url: serviceBaseUrl + 'api/admin/Ads/:id', params: {id: '@id'}, method: 'GET', headers: headers},
-        'editAd': {url: serviceBaseUrl + 'api/admin/Ads/:id', params: {id: '@id'}, method: 'PUT', headers: headers}
+        'getAd': {url: serviceBaseUrl + 'admin/Ads/:id', params: {id: '@id'}, method: 'GET', headers: headers},
+        'editAd': {url: serviceBaseUrl + 'admin/Ads/:id', params: {id: '@id'}, method: 'PUT', headers: headers}
     });
 
     function getAllAds(params){

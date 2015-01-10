@@ -3,7 +3,7 @@
     </aside>
     <div class="col-md-10">
         <div class="alert alert-warning" role="alert" ng-show="showAlert">{{alertMessage}}</div>
-        <div class="alert alert-success" role="alert" ng-show="showSucces">{{successMessage}}</div>
+        <div class="alert alert-success" role="alert" ng-show="showSuccess">{{successMessage}}</div>
         <div class="panel panel-default shadow" ng-show="showForm">
             <div class="panel-heading">
                 <h2 class="panel-title text-center">{{pageName}}</h2>
@@ -16,8 +16,7 @@
 
                             <div class="col-md-11">
                                 <input type="text" ng-model="ad.title" required="required" id="ad-title"
-                                       class="form-control"
-                                       placeholder="Title"/>
+                                       class="form-control"/>
                             </div>
 
                             <label class="col-md-1" for="ad-text">Text: </label>
@@ -39,6 +38,22 @@
 
                             <div class="col-md-11">
                                 <div browse-image preview="#img-preview" image="imageSetData"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-1" for="ad-username">Username: </label>
+
+                            <div class="col-md-5">
+                                <input type="text" ng-model="ad.ownerUsername" id="ad-username"
+                                       class="form-control"  ng-required="true"/>
+                            </div>
+
+
+                            <div class="col-md-6">
+                              <button class="btn btn-default" ng-click="deleteImage(ad)">Delete image</button>
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,7 @@
     </aside>
     <div class="col-md-10">
         <div class="alert alert-warning" role="alert" ng-show="showAlert">{{alertMessage}}</div>
-        <div class="alert alert-success" role="alert" ng-show="showSucces">{{successMessage}}</div>
+        <div class="alert alert-success" role="alert" ng-show="showSuccess">{{successMessage}}</div>
         <div class="panel panel-default shadow" ng-show="showForm">
             <div class="panel-heading">
                 <h2 class="panel-title text-center">{{pageName}}</h2>
@@ -30,7 +30,9 @@
 
                         <div class="image-container col-md-3">
                             <img src="{{imageDataUrl}}" id="img-preview" alt="ad image"/>
+                            <button class="btn btn-default" ng-click="deleteImage(ad)" ng-if="pageName == 'Edit Ad'">Delete image</button>
                         </div>
+
                     </div>
 
                     <div class="row">
@@ -47,7 +49,7 @@
                         <div class="form-group col-md-12">
                             <label class="col-md-1" for="towns-select">Town: </label>
 
-                            <div class="col-md-11">
+                            <div class="col-md-5">
                                 <select class="form-control" name="townsSelect" ng-model="ad.townId">
                                     <option data-ng-repeat="town in towns" value="{{town.id}}">
                                         {{town.name}}
@@ -61,7 +63,7 @@
                         <div class="form-group col-md-12">
                             <label class="col-md-1" for="categories-select">Category: </label>
 
-                            <div class="col-md-11">
+                            <div class="col-md-5">
                                 <select name="categoriesSelect" class="form-control" ng-model="ad.categoryId">
                                     <option data-ng-repeat="category in categories" value="{{category.id}}">
                                         {{category.name}}
