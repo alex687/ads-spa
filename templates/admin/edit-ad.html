@@ -1,0 +1,113 @@
+<div class="row" ng-controller="AdminEditAdController">
+    <aside class="col-md-2" ng-include="'templates/admin/menu.html'">
+    </aside>
+    <div class="col-md-10">
+        <div class="alert alert-warning" role="alert" ng-show="showAlert">{{alertMessage}}</div>
+        <div class="alert alert-success" role="alert" ng-show="showSucces">{{successMessage}}</div>
+        <div class="panel panel-default shadow" ng-show="showForm">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center">{{pageName}}</h2>
+            </div>
+            <div class="panel-body">
+                <form name="adEditForm">
+                    <div class="row">
+                        <div class="form-group col-md-9">
+                            <label class="col-md-1" for="ad-title">Title: </label>
+
+                            <div class="col-md-11">
+                                <input type="text" ng-model="ad.title" required="required" id="ad-title"
+                                       class="form-control"
+                                       placeholder="Title"/>
+                            </div>
+
+                            <label class="col-md-1" for="ad-text">Text: </label>
+
+                            <div class="col-md-11">
+                                <textarea class="form-control col-md-10" required="required" ng-model="ad.text"
+                                          name="adTextArea" id="ad-text" cols="40" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="image-container col-md-3">
+                            <img src="{{imageDataUrl}}" id="img-preview" alt="ad image"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-1">Image: </label>
+
+                            <div class="col-md-11">
+                                <div browse-image preview="#img-preview" image="imageSetData"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-1" for="towns-select">Town: </label>
+
+                            <div class="col-md-5">
+                                <select class="form-control" name="townsSelect" ng-model="ad.townId">
+                                    <option data-ng-repeat="town in towns" value="{{town.id}}">
+                                        {{town.name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <label class="col-md-1" for="categories-select">Category: </label>
+
+                            <div class="col-md-5">
+                                <select name="categoriesSelect" class="form-control" ng-model="ad.categoryId">
+                                    <option data-ng-repeat="category in categories" value="{{category.id}}">
+                                        {{category.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-1" for="date-select">Date: </label>
+
+                            <div class="col-md-5">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}"
+                                           ng-model="ad.date"
+                                           is-open="opened"
+                                           datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                           ng-required="true" close-text="Close"/>
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openDatePicker($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                </p>
+                            </div>
+
+                            <label class="col-md-1" for="status-select">Status: </label>
+
+                            <div class="col-md-5">
+                                <select name="status" class="form-control" ng-model="ad.status">
+                                    <option value="Inactive">Inactive</option>
+                                    <option value="WaitingApproval">Waiting Approval</option>
+                                    <option value="Published">Published</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group pull-left col-md-12">
+                        <div>
+                            <button ng-click="submit(ad, adEditForm)"
+                                    ng-disabled="adEditForm.$invalid"
+                                    class="btn btn-default col-md-4">{{buttonSubmitText}}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

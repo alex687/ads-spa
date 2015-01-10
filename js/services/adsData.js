@@ -58,7 +58,9 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
     var adminResource = $resource(serviceBaseUrl + 'admin/', null , {
         'getAllAds': {url: serviceBaseUrl + 'admin/Ads', method: 'GET', headers: headers},
         'approveAd': {url: serviceBaseUrl + 'admin/Ads/Approve/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
-        'rejectAd': {url: serviceBaseUrl + 'admin/Ads/Reject/:id', params: {id: '@id'}, method: 'PUT', headers: headers}
+        'rejectAd': {url: serviceBaseUrl + 'admin/Ads/Reject/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
+        'getAd': {url: serviceBaseUrl + 'api/admin/Ads/:id', params: {id: '@id'}, method: 'GET', headers: headers},
+        'editAd': {url: serviceBaseUrl + 'api/admin/Ads/:id', params: {id: '@id'}, method: 'PUT', headers: headers}
     });
 
     function getAllAds(params){
@@ -71,6 +73,14 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
 
     function rejectAd(id){
         return adminResource.rejectAd({id: id});
+    }
+
+    function adminEditAd(id, ad){
+        return adminResource.editAd({id: id}, ad);
+    }
+
+    function adminGetAd(id){
+        return adminResource.getAd({id: id});
     }
 
     return {
@@ -86,7 +96,9 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         admin: {
             getAllAds: getAllAds,
             approveAd: approveAd,
-            rejectAd: rejectAd
+            rejectAd: rejectAd,
+            editAd: adminEditAd,
+            getAd: adminGetAd
         }
     }
 });
