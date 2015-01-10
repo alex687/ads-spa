@@ -158,7 +158,28 @@ var adsApp = angular
                         redirectTo: 'home'
                     }
                 }
+            })   .state('admin-towns-list', {
+                url: "/admin/towns/list",
+                templateUrl: "templates/admin/towns-categories-list.html",
+                controller: 'AdminUserListController',
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: 'home'
+                    }
+                }
             })
+            .state('admin-towns-create', {
+                url: "/admin/towns/create",
+                templateUrl: "templates/admin/towns-categories-create.html",
+                controller: 'AdminUserListController',
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: 'home'
+                    }
+                }
+            });
     })
     .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')
     .constant('pageSize', 5)

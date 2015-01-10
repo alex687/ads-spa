@@ -1,13 +1,13 @@
 'use strict';
 
-adsApp.controller('AdminUserListController', function AdminHomeController($scope, userData, pageSize, $state) {
+adsApp.controller('AdminUserListController', function AdminUserListController($scope, adsData, pageSize, $state) {
     var params = {PageSize: pageSize * 3, SortBy: 'Id'};
     $scope.pageSize = pageSize * 3;
 
 
     $scope.pageChanged = function () {
         params.StartPage = $scope.currentPage;
-        loadUsers(params)
+        loadTowns(params);
     };
 
     $scope.sort = function sortTowns(by) {
@@ -19,27 +19,28 @@ adsApp.controller('AdminUserListController', function AdminHomeController($scope
                 params.SortBy = by;
             }
         }
-        loadUsers();
+        loadTowns();
     };
 
     $scope.userForEdit = function (user) {
-        userData.admin.saveUserData(user);
-        $state.transitionTo('admin-user-edit', {'userId': user.id});
+        adsData.admin.saveUserData(user);
+        $state.transitionTo('admin-towns-edit', {'userId': user.id});
     };
 
     $scope.userForDelete = function (user) {
-        userData.admin.saveUserData(user);
-        $state.transitionTo('admin-user-delete', {'userId': user.id});
+        adsData.admin.saveUserData(user);
+        $state.transitionTo('admin-towns-delete', {'userId': user.id});
     };
 
+    $scope.$emit('changePageName', 'Admin Towns');
 
     function loadTowns() {
-        userData.admin.getAll(params).$promise.then(function (data) {
-            $scope.users = data.users;
+        adsData.admin.towns.getAll(params).$promise.then(function (data) {
+            $scope.items = data.towns;
             $scope.totalItems = data.numItems;
             $scope.areUsersLoaged = true;
         });
     }
 
-    loadUsers();
+    loadTowns();
 });

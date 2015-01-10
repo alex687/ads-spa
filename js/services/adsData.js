@@ -14,17 +14,27 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return $http({method: 'GET', url: serviceBaseUrl + 'towns/'});
     }
 
-    var headers = {'Authorization' :authorization.getHeaders()};
+    var headers = {'Authorization': authorization.getHeaders()};
     var resource = $resource(
-        serviceBaseUrl +'user/ads/:id',
+        serviceBaseUrl + 'user/ads/:id',
         null,
         {
             'save': {method: 'POST', headers: headers},
             'get': {method: 'GET', headers: headers},
             'update': {method: 'PUT', headers: headers},
             'delete': {method: 'DELETE', headers: headers},
-            'deactivate': {url: serviceBaseUrl + 'user/ads/deactivate/:id', method: 'PUT', params: {id: '@id'}, headers: headers},
-            'publishAgain': {url: serviceBaseUrl + 'user/ads/publishAgain/:id', method: 'PUT', params: {id: '@id'}, headers: headers}
+            'deactivate': {
+                url: serviceBaseUrl + 'user/ads/deactivate/:id',
+                method: 'PUT',
+                params: {id: '@id'},
+                headers: headers
+            },
+            'publishAgain': {
+                url: serviceBaseUrl + 'user/ads/publishAgain/:id',
+                method: 'PUT',
+                params: {id: '@id'},
+                headers: headers
+            }
         });
 
     function getAllUerAds(params) {
@@ -47,52 +57,57 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return resource.delete({id: id});
     }
 
-    function deactivateAd(id){
+    function deactivateAd(id) {
         return resource.deactivate({id: id});
     }
 
-    function publishAgain(id){
+    function publishAgain(id) {
         return resource.publishAgain({id: id});
     }
 
 
-    var baseAdminUrl =  serviceBaseUrl + 'admin/';
-    var adminResource = $resource(serviceBaseUrl + 'admin/', null , {
-        'getAllAds': {url:baseAdminUrl + 'Ads', method: 'GET', headers: headers},
+    var baseAdminUrl = serviceBaseUrl + 'admin/';
+    var adminResource = $resource(serviceBaseUrl + 'admin/', null, {
+        'getAllAds': {url: baseAdminUrl + 'Ads', method: 'GET', headers: headers},
         'approveAd': {url: baseAdminUrl + 'Ads/Approve/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
         'rejectAd': {url: baseAdminUrl + 'Ads/Reject/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
         'getAd': {url: baseAdminUrl + 'Ads/:id', params: {id: '@id'}, method: 'GET', headers: headers},
         'editAd': {url: baseAdminUrl + 'Ads/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
         'deleteAd': {url: baseAdminUrl + 'Ads/:id', params: {id: '@id'}, method: 'DELETE', headers: headers},
-        'getAllTowns': {url: baseAdminUrl + 'Towns/', method: 'GET', headers: headers}
+        'getAllTowns': {url: baseAdminUrl + 'Towns/', method: 'GET', headers: headers},
+        'createTown': {url: baseAdminUrl + 'Towns/', method: 'POST', headers: headers},
     });
 
-    function getAllAds(params){
+    function getAllAds(params) {
         return adminResource.getAllAds(params);
     }
 
-    function approveAd(id){
+    function approveAd(id) {
         return adminResource.approveAd({id: id});
     }
 
-    function rejectAd(id){
+    function rejectAd(id) {
         return adminResource.rejectAd({id: id});
     }
 
-    function adminEditAd(id, ad){
+    function adminEditAd(id, ad) {
         return adminResource.editAd({id: id}, ad);
     }
 
-    function adminGetAd(id){
+    function adminGetAd(id) {
         return adminResource.getAd({id: id});
     }
 
-    function adminDeleteAd(id){
+    function adminDeleteAd(id) {
         return adminResource.deleteAd({id: id});
     }
 
-    function adminGetAllTowns(params){
+    function adminGetAllTowns(params) {
         return adminResource.getAllTowns(params);
+    }
+
+    function adminCreateTown(name) {
+        return adminResource.createTown({name: name});
     }
 
     return {
@@ -104,7 +119,7 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         getAdById: getAdById,
         editAd: editAd,
         deleteAd: deleteAd,
-        deactivateAd : deactivateAd,
+        deactivateAd: deactivateAd,
         admin: {
             getAllAds: getAllAds,
             approveAd: approveAd,
@@ -112,8 +127,9 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
             editAd: adminEditAd,
             getAd: adminGetAd,
             deleteAd: adminDeleteAd,
-            towns:{
-                getAll: adminGetAllTowns
+            towns: {
+                getAll: adminGetAllTowns,
+                create: adminCreateTown
             }
         }
     }
