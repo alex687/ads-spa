@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.controller('AdminEditAdController', function PublishAdController($scope, adsData, $stateParams) {
+adsApp.controller('AdminEditAdController', function AdminEditAdController($scope, adsData, $stateParams) {
     $scope.showForm = false;
     $scope.ad = {};
     $scope.imageDataUrl = 'img/no-image.PNG';

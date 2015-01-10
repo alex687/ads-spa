@@ -76,6 +76,12 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
                 method: 'PUT',
                 headers: headers
             },
+            'deleteUser': {
+                url: baseAdminUrl + 'User/:username',
+                params: {username: '@username'},
+                method: 'DELETE',
+                headers: headers
+            },
             'SetPassword': {
                 url: baseAdminUrl + 'SetPassword/',
                 method: 'PUT',
@@ -108,8 +114,7 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
         return adminResource.editUser({username: username}, data);
     }
 
-    function adminSetPassword(username, newPassword, confirmPassword)
-    {
+    function adminSetPassword(username, newPassword, confirmPassword) {
         var data = {
             username: username,
             newPassword: newPassword,
@@ -118,6 +123,11 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
 
         return adminResource.SetPassword(data);
     }
+
+    function adminDeleteUser(username) {
+        return adminResource.deleteUser({username: username});
+    }
+
     return {
         register: register,
         login: login,
@@ -129,7 +139,8 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
             saveUserData: saveUserData,
             getSavedUserData: getSavedUserData,
             editProfile: adminEditProfile,
-            setPassword:adminSetPassword
+            setPassword: adminSetPassword,
+            deleteUser: adminDeleteUser
         }
     }
 });

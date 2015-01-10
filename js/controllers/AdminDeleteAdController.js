@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.controller('AdminDeleteAdController', function PublishAdController($scope, adsData, $stateParams) {
+adsApp.controller('AdminDeleteAdController', function AdminDeleteAdController($scope, adsData, $stateParams) {
     $scope.showForm = false;
 
     adsData.admin.getAd($stateParams.adId).$promise.then(function (ad) {
