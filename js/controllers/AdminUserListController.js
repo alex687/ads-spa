@@ -24,8 +24,14 @@ adsApp.controller('AdminUserListController', function AdminHomeController($scope
 
     $scope.userForEdit = function (user) {
         userData.admin.saveUserData(user);
-        $state.transitionTo('admin-user-edit',{'userId':user.id});
+        $state.transitionTo('admin-user-edit', {'userId': user.id});
     };
+
+    $scope.userForDelete = function (user) {
+        userData.admin.saveUserData(user);
+        $state.transitionTo('admin-user-delete', {'userId': user.id});
+    };
+
 
     function loadUsers() {
         userData.admin.getAll(params).$promise.then(function (data) {

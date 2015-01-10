@@ -149,6 +149,16 @@ var adsApp = angular
                     }
                 }
             })
+            .state('admin-user-delete', {
+                url: "/admin/users/delete/:userId",
+                templateUrl: "templates/admin/users-delete.html",
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: 'home'
+                    }
+                }
+            })
     })
     .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')
     .constant('pageSize', 5)

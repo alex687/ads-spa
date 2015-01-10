@@ -101,6 +101,10 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
         return JSON.parse(localStorage.getItem('data'));
     }
 
+    function removeSavedUserData() {
+        localStorage.removeItem('data');
+    }
+
     function adminEditProfile(username, name, email, phone, townId) {
         var data = {
             name: name,
@@ -140,7 +144,8 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
             getSavedUserData: getSavedUserData,
             editProfile: adminEditProfile,
             setPassword: adminSetPassword,
-            deleteUser: adminDeleteUser
+            deleteUser: adminDeleteUser,
+            removeSavedUserData: removeSavedUserData
         }
     }
 });

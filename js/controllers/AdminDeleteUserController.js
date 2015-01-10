@@ -6,11 +6,11 @@ adsApp.controller('AdminDeleteUserController', function AdminDeleteUserControlle
     $scope.user = userData.admin.getSavedUserData();
 
     $scope.delete = function () {
-        userData.admin.de($stateParams.adId).$promise.then(function (data) {
+        userData.admin.deleteUser($scope.user.username).$promise.then(function (data) {
             $scope.$emit('showSuccess', data.message);
+            userData.admin.removeSavedUserData();
         }, function (data) {
             $scope.$emit('showAlert', data.error_description);
-
         });
     };
 
