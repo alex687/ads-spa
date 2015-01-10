@@ -65,15 +65,42 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
     }
 
     var baseAdminUrl = serviceBaseUrl + 'admin/';
-    var adminResource =   $resource(
+    var adminResource = $resource(
         baseAdminUrl,
         null,
         {
-            'getAll': {url: baseAdminUrl + 'Users/', method: 'GET',  headers: headers}
+            'getAll': {url: baseAdminUrl + 'Users/', method: 'GET', headers: headers},
+            'editUser': {
+                url: baseAdminUrl + 'User/:username',
+                params: {username: '@username'},
+                method: 'PUT',
+                headers: headers
+            }
         });
 
-    function getAllUsers(params){
+    function getAllUsers(params) {
         return adminResource.getAll(params);
+    }
+
+    function saveUserData(user) {
+        localStorage.setItem('data', JSON.stringify(user));
+    }
+
+    function getSavedUserData() {
+        return JSON.parse(localStorage.getItem('data'));
+    }
+
+    function adminEditProfile(username, name, email, phone, townId) {
+        var data = {
+            name: name,
+            email: email,
+            phoneNumber: phone
+        };
+        if (townId) {
+            data.townId = townId;
+        }
+
+        return adminResource.editUser({username: username}, data);
     }
 
     return {
@@ -82,8 +109,11 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
         getProfile: getProfile,
         editProfile: editProfile,
         changePassword: changePassword,
-        admin:{
-            getAll: getAllUsers
+        admin: {
+            getAll: getAllUsers,
+            saveUserData: saveUserData,
+            getSavedUserData: getSavedUserData,
+            editProfile: adminEditProfile
         }
     }
 });

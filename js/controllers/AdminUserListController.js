@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.controller('AdminUserListController', function AdminHomeController($scope, userData, pageSize) {
+adsApp.controller('AdminUserListController', function AdminHomeController($scope, userData, pageSize, $state) {
     var params = {PageSize: pageSize * 3, SortBy: 'UserName'};
     $scope.pageSize = pageSize * 3;
 
@@ -20,6 +20,11 @@ adsApp.controller('AdminUserListController', function AdminHomeController($scope
             }
         }
         loadUsers();
+    };
+
+    $scope.userForEdit = function (user) {
+        userData.admin.saveUserData(user);
+        $state.transitionTo('admin-user-edit',{'userId':user.id});
     };
 
     function loadUsers() {
