@@ -64,11 +64,26 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
         return resource.changePassword(data);
     }
 
+    var baseAdminUrl = serviceBaseUrl + 'admin/';
+    var adminResource =   $resource(
+        baseAdminUrl,
+        null,
+        {
+            'getAll': {url: baseAdminUrl + 'Users/', method: 'GET',  headers: headers}
+        });
+
+    function getAllUsers(params){
+        return adminResource.getAll(params);
+    }
+
     return {
         register: register,
         login: login,
         getProfile: getProfile,
         editProfile: editProfile,
-        changePassword: changePassword
+        changePassword: changePassword,
+        admin:{
+            getAll: getAllUsers
+        }
     }
 });

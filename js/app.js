@@ -129,6 +129,16 @@ var adsApp = angular
                     }
                 }
             })
+            .state('admin-users', {
+                url: "/admin/users/list",
+                templateUrl: "templates/admin/users-list.html",
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: 'home'
+                    }
+                }
+            })
     })
     .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')
     .constant('pageSize', 5)
