@@ -75,6 +75,11 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
                 params: {username: '@username'},
                 method: 'PUT',
                 headers: headers
+            },
+            'SetPassword': {
+                url: baseAdminUrl + 'SetPassword/',
+                method: 'PUT',
+                headers: headers
             }
         });
 
@@ -103,6 +108,16 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
         return adminResource.editUser({username: username}, data);
     }
 
+    function adminSetPassword(username, newPassword, confirmPassword)
+    {
+        var data = {
+            username: username,
+            newPassword: newPassword,
+            confirmPassword: confirmPassword
+        };
+
+        return adminResource.SetPassword(data);
+    }
     return {
         register: register,
         login: login,
@@ -113,7 +128,8 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
             getAll: getAllUsers,
             saveUserData: saveUserData,
             getSavedUserData: getSavedUserData,
-            editProfile: adminEditProfile
+            editProfile: adminEditProfile,
+            setPassword:adminSetPassword
         }
     }
 });

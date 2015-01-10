@@ -15,7 +15,7 @@ adsApp.controller('AdminUserEditController', function UserProfileEdit($scope, us
     };
 
     $scope.changePassword = function (user) {
-        userData.changePassword(user.oldPassword, user.newPassword, user.confirmPassword).$promise.then(function (data) {
+        userData.admin.setPassword(user.username, user.newPassword, user.confirmPassword).$promise.then(function (data) {
                 $scope.$emit('showSuccess', data.message);
             },
             function () {

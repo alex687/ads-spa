@@ -4,77 +4,78 @@
     <div class="col-md-10">
         <div class="alert alert-warning" role="alert" ng-show="showAlert">{{alertMessage}}</div>
         <div class="alert alert-success" role="alert" ng-show="showSuccess">{{successMessage}}</div>
-        <div class="row"> <div class="col-md-6">
-            <div class="panel panel-default shadow">
-                <div class="panel-heading">
-                    <h2 class="panel-title text-center">{{pageName}}</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default shadow">
+                    <div class="panel-heading">
+                        <h2 class="panel-title text-center">{{pageName}}</h2>
+                    </div>
+                    <div class="panel-body">
+                        <form name="profileEdit">
+                            <div class="row form-group">
+                                <label class="col-md-12" for="user-username">Username: </label>
+
+                                <div class="col-md-12">
+                                    <input type="text" value="{{user.username}}" disabled="disabled" id="user-username"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="col-md-12" for="user-name">Name: </label>
+
+                                <div class="col-md-12">
+                                    <input type="text" ng-model="user.name" required="required" id="user-name"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="col-md-12" for="user-email">Email: </label>
+
+                                <div class="col-md-12">
+                                    <input type="text" ng-model="user.email" required="required" id="user-email"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+
+                                <label class="col-md-12" for="user-phone">Phone:</label>
+
+                                <div class="col-md-12">
+                                    <input type="text" ng-model="user.phoneNumber" required="required" id="user-phone"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+
+
+                            <div class="row form-group">
+                                <label class="col-md-12" for="towns-select">Town: </label>
+
+                                <div class="col-md-12">
+                                    <select class="form-control" name="townsSelect" ng-model="user.townId">
+                                        <option data-ng-repeat="town in towns" value="{{town.id}}">
+                                            {{town.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group pull-left col-md-12">
+                                <div>
+                                    <button ng-click="editProfile(user)"
+                                            ng-disabled="profileEdit.$invalid"
+                                            class="btn btn-default col-md-4">
+                                        Edit profile
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <form name="profileEdit">
-                        <div class="row form-group">
-                            <label class="col-md-12" for="user-username">Username: </label>
 
-                            <div class="col-md-12">
-                                <input type="text" value="{{user.username}}" disabled="disabled" id="user-username"
-                                       class="form-control"/>
-                            </div>
-                        </div>
-
-                        <div class="row form-group">
-                            <label class="col-md-12" for="user-name">Name: </label>
-
-                            <div class="col-md-12">
-                                <input type="text" ng-model="user.name" required="required" id="user-name"
-                                       class="form-control"/>
-                            </div>
-                        </div>
-
-                        <div class="row form-group">
-                            <label class="col-md-12" for="user-email">Email: </label>
-
-                            <div class="col-md-12">
-                                <input type="text" ng-model="user.email" required="required" id="user-email"
-                                       class="form-control"/>
-                            </div>
-                        </div>
-
-                        <div class="row form-group">
-
-                            <label class="col-md-12" for="user-phone">Phone:</label>
-
-                            <div class="col-md-12">
-                                <input type="text" ng-model="user.phoneNumber" required="required" id="user-phone"
-                                       class="form-control"/>
-                            </div>
-                        </div>
-
-
-                        <div class="row form-group">
-                            <label class="col-md-12" for="towns-select">Town: </label>
-
-                            <div class="col-md-12">
-                                <select class="form-control" name="townsSelect" ng-model="user.townId">
-                                    <option data-ng-repeat="town in towns" value="{{town.id}}">
-                                        {{town.name}}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group pull-left col-md-12">
-                            <div>
-                                <button ng-click="editProfile(user)"
-                                        ng-disabled="profileEdit.$invalid"
-                                        class="btn btn-default col-md-4">
-                                    Edit profile
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
             </div>
-
-        </div>
             <div class="col-md-6">
                 <div class="panel panel-default shadow">
                     <div class="panel-heading">
@@ -83,19 +84,11 @@
                     <div class="panel-body">
                         <form name="passwordChange">
                             <div class="row form-group">
-                                <label class="col-md-12" for="user-old-password">Old Password: </label>
-
-                                <div class="col-md-12">
-                                    <input type="password" ng-model="user.oldPassword" required="required" id="user-old-password"
-                                           class="form-control"/>
-                                </div>
-                            </div>
-
-                            <div class="row form-group">
                                 <label class="col-md-12" for="user-new-password">New Password: </label>
 
                                 <div class="col-md-12">
-                                    <input type="password" ng-model="user.newPassword" required="required" id="user-new-password"
+                                    <input type="password" ng-model="user.newPassword" required="required"
+                                           id="user-new-password"
                                            class="form-control"/>
                                 </div>
                             </div>
@@ -105,14 +98,15 @@
                                 <label class="col-md-12" for="user-confirm-password">Confirm Password:</label>
 
                                 <div class="col-md-12">
-                                    <input type="password" ng-model="user.confirmPassword" required="required" id="user-confirm-password"
+                                    <input type="password" ng-model="user.confirmPassword" required="required"
+                                           id="user-confirm-password"
                                            class="form-control"/>
                                 </div>
                             </div>
 
                             <div class="form-group pull-left col-md-12">
                                 <div>
-                                    <button ng-click="changePassword(ad)"
+                                    <button ng-click="changePassword(user)"
                                             ng-disabled="passwordChange.$invalid"
                                             class="btn btn-default col-md-8">
                                         Change password
@@ -123,7 +117,8 @@
                     </div>
                 </div>
 
-            </div></div>
+            </div>
+        </div>
     </div>
 
 </div>
