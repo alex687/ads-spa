@@ -1,4 +1,4 @@
-adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
+adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization, storageData) {
     var baseUserUrl = serviceBaseUrl + 'user/';
     var headers = {'Authorization': authorization.getHeaders()};
     var resource = $resource(
@@ -93,12 +93,13 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
         return adminResource.getAll(params);
     }
 
-    function saveUserData(user) {
-        localStorage.setItem('data', JSON.stringify(user));
-    }
+    function getUser(id) {
+        var userData = storageData.get('user_data');
+        if (userData && userData.id == id) {
+            return userData;
+        }
 
-    function getSavedUserData() {
-        return JSON.parse(localStorage.getItem('data'));
+        return undefined;
     }
 
     function removeSavedUserData() {
@@ -140,12 +141,10 @@ adsApp.factory('userData', function ($resource, serviceBaseUrl, authorization) {
         changePassword: changePassword,
         admin: {
             getAll: getAllUsers,
-            saveUserData: saveUserData,
-            getSavedUserData: getSavedUserData,
+            getUser: getUser,
             editProfile: adminEditProfile,
             setPassword: adminSetPassword,
-            deleteUser: adminDeleteUser,
-            removeSavedUserData: removeSavedUserData
+            deleteUser: adminDeleteUser
         }
     }
 });

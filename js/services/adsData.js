@@ -164,7 +164,18 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
                 removeTownData: adminRemoveTownData,
                 edit: editTown,
                 delete: deleteTown
+            },
+
+            categories: {
+                getAll: adminGetAllTowns,
+                create: adminCreateTown,
+                getTown: adminGetTownData,
+                saveTownData: adminSaveTownData,
+                removeTownData: adminRemoveTownData,
+                edit: editTown,
+                delete: deleteTown
             }
+
         }
     }
 });

@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.controller('AdminUserListController', function AdminHomeController($scope, userData, pageSize, $state) {
+adsApp.controller('AdminUserListController', function AdminHomeController($scope, userData, pageSize, $state, storageData) {
     var params = {PageSize: pageSize * 3, SortBy: 'UserName'};
     $scope.pageSize = pageSize * 3;
 
@@ -23,12 +23,12 @@ adsApp.controller('AdminUserListController', function AdminHomeController($scope
     };
 
     $scope.userForEdit = function (user) {
-        userData.admin.saveUserData(user);
+        storageData.save('user_data',user);
         $state.transitionTo('admin-user-edit', {'userId': user.id});
     };
 
     $scope.userForDelete = function (user) {
-        userData.admin.saveUserData(user);
+        storageData.save('user_data',user);
         $state.transitionTo('admin-user-delete', {'userId': user.id});
     };
 

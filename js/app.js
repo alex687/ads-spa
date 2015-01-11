@@ -161,7 +161,7 @@ var adsApp = angular
             }).state('admin-towns-list', {
                 url: "/admin/towns/list",
                 templateUrl: "templates/admin/towns-categories-list.html",
-                controller: 'AdminUserListController',
+                controller: 'AdminTownsListController',
                 data: {
                     permissions: {
                         only: ['admin'],
