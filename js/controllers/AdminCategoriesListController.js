@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.controller('AdminCategoriesListController', function AdminCategoriesListController($scope, adsData, pageSize, $state) {
+adsApp.controller('AdminCategoriesListController', function AdminCategoriesListController($scope, adsData, pageSize, $state, storageData) {
     var params = {PageSize: pageSize * 3, SortBy: 'Id'};
     $scope.pageSize = pageSize * 3;
 
@@ -23,20 +23,20 @@ adsApp.controller('AdminCategoriesListController', function AdminCategoriesListC
     };
 
     $scope.forEdit = function (category) {
-        adsData.admin.towns.saveTownData(category);
-        $state.transitionTo('admin-towns-edit', {'townId': category.id});
+        storageData.save('category_data',category);
+        $state.transitionTo('admin-categories-edit', {'categoryId': category.id});
     };
 
     $scope.forDelete = function (category) {
-        adsData.admin.towns.saveTownData(category);
-        $state.transitionTo('admin-towns-delete', {'townId': category.id});
+        storageData.save('category_data',category);
+        $state.transitionTo('admin-categories-delete', {'categoryId': category.id});
     };
 
     $scope.$emit('changePageName', 'Admin Categories');
 
     function loadCategories() {
         adsData.admin.categories.getAll(params).$promise.then(function (data) {
-            $scope.items = data.towns;
+            $scope.items = data.categories;
             $scope.totalItems = data.numItems;
             $scope.areUsersLoaged = true;
         });

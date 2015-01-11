@@ -77,7 +77,11 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         'getAllTowns': {url: baseAdminUrl + 'Towns/', method: 'GET', headers: headers},
         'createTown': {url: baseAdminUrl + 'Towns/', method: 'POST', headers: headers},
         'editTown': {url: baseAdminUrl + 'Towns/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
-        'deleteTown': {url: baseAdminUrl + 'Towns/:id', params: {id: '@id'}, method: 'DELETE', headers: headers}
+        'deleteTown': {url: baseAdminUrl + 'Towns/:id', params: {id: '@id'}, method: 'DELETE', headers: headers},
+        'getAllCategories': {url: baseAdminUrl + 'Categories/', method: 'GET', headers: headers},
+        'createCategory': {url: baseAdminUrl + 'Categories/', method: 'POST', headers: headers},
+        'editCategory': {url: baseAdminUrl + 'Categories/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
+        'deleteCategory': {url: baseAdminUrl + 'Categories/:id', params: {id: '@id'}, method: 'DELETE', headers: headers}
     });
 
     function getAllAds(params) {
@@ -112,10 +116,6 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return adminResource.createTown({name: name});
     }
 
-    function adminSaveTownData(town) {
-        localStorage.setItem('town_data', JSON.stringify(town));
-    }
-
     function adminGetTownData(townId) {
 
         var townData = JSON.parse(localStorage.getItem('town_data'));
@@ -127,16 +127,29 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return undefined;
     }
 
-    function adminRemoveTownData() {
-        localStorage.removeItem('town_data');
-    }
-
     function editTown(id, name) {
         return adminResource.editTown({'id': id}, {name: name});
     }
 
-    function deleteTown(id){
+    function deleteTown(id) {
         return adminResource.deleteTown({'id': id});
+    }
+
+    function adminGetAllCategories(params) {
+        return adminResource.getAllCategories(params);
+    }
+
+    function adminCreateCategory(params) {
+        return adminResource.createCategory(params);
+    }
+
+    function adminGetCategory(id){
+
+        var categoryData = JSON.parse(localStorage.getItem('town_data'));
+        if (categoryData && categoryData.id == id) {
+            return categoryData;
+        }
+        return undefined;
     }
 
     return {
@@ -160,18 +173,14 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
                 getAll: adminGetAllTowns,
                 create: adminCreateTown,
                 getTown: adminGetTownData,
-                saveTownData: adminSaveTownData,
-                removeTownData: adminRemoveTownData,
                 edit: editTown,
                 delete: deleteTown
             },
 
             categories: {
-                getAll: adminGetAllTowns,
-                create: adminCreateTown,
+                getAll: adminGetAllCategories,
+                create: adminCreateCategory,
                 getTown: adminGetTownData,
-                saveTownData: adminSaveTownData,
-                removeTownData: adminRemoveTownData,
                 edit: editTown,
                 delete: deleteTown
             }

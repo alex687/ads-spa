@@ -199,6 +199,16 @@ var adsApp = angular
                         redirectTo: 'home'
                     }
                 }
+            }).state('admin-categories-list', {
+                url: "/admin/categories/list",
+                templateUrl: "templates/admin/towns-categories-list.html",
+                controller: 'AdminCategoriesListController',
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: 'home'
+                    }
+                }
             });
     })
     .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')
