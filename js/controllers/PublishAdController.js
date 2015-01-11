@@ -1,8 +1,6 @@
 'use strict';
 
 adsApp.controller('PublishAdController', function PublishAdController($scope, adsData) {
-    $scope.showAlert = false;
-    $scope.showSucces = false;
     $scope.showForm = true;
     $scope.ad = {};
     $scope.imageDataUrl = 'img/no-image.PNG';
@@ -17,12 +15,9 @@ adsApp.controller('PublishAdController', function PublishAdController($scope, ad
 
     $scope.submit = function (ad) {
         adsData.createNewAd(ad).$promise.then(function (data) {
-            $scope.publishAdAlert = false;
-            $scope.showSucces = true;
-            $scope.successMessage = data.message;
+            $scope.$emit('showSuccess', data.message);
         }, function (data) {
-            $scope.publishAdAlert = true;
-            $scope.alertMessage = data.error_description
+            $scope.$emit('showAlert', data.error_description);
         });
     };
 

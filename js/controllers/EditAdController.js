@@ -15,8 +15,11 @@ adsApp.controller('EditAdController', function PublishAdController($scope, adsDa
 
     adsData.getAdById($stateParams.adId).$promise.then(function (ad) {
         $scope.ad = ad;
-        $scope.imageDataUrl = ad.imageDataUrl;
+        if (ad.imageDataUrl) {
+            $scope.imageDataUrl = ad.imageDataUrl;
+        }
         $scope.showForm = true;
+
     });
 
     $scope.submit = function (ad) {
@@ -49,7 +52,7 @@ adsApp.controller('EditAdController', function PublishAdController($scope, adsDa
 
     $scope.imageSetData = function (imageData) {
         $scope.ad.imageDataUrl = imageData;
-        ad.changeImage = true;
+        $scope.ad.changeImage = true;
     };
 
     $scope.pageName = 'Edit Ad';

@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.controller('AdminTownEditController', function AdminTownEditController($scope, adsData, $stateParams, $state) {
+adsApp.controller('AdminTownEditController', function AdminTownEditController($scope, adsData, $stateParams, $state, storageData) {
 
     var townData = adsData.admin.towns.getTown($stateParams.townId);
     if (!townData) {
@@ -12,7 +12,7 @@ adsApp.controller('AdminTownEditController', function AdminTownEditController($s
         adsData.admin.towns.edit(townData.id, name).$promise.then(function (data) {
                 $scope.$emit('showSuccess', data.message);
                 townData.username = $scope.name;
-                adsData.admin.towns.saveTownData(townData);
+                storageData.save('town_data',townData);
             },
             function (data) {
                 $scope.$emit('showAlert', data.message);

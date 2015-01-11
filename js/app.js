@@ -209,6 +209,26 @@ var adsApp = angular
                         redirectTo: 'home'
                     }
                 }
+            }).state('admin-categories-edit', {
+                url: "/admin/categories/edit/:categoryId",
+                templateUrl: "templates/admin/towns-categories-create-edit-delete.html",
+                controller: 'AdminCategoriesEditController',
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: 'home'
+                    }
+                }
+            }).state('admin-categories-delete', {
+                url: "/admin/categories/delete/:categoryId",
+                templateUrl: "templates/admin/towns-categories-create-edit-delete.html",
+                controller: 'AdminCategoriesDeleteController',
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: 'home'
+                    }
+                }
             });
     })
     .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')

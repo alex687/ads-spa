@@ -81,7 +81,12 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         'getAllCategories': {url: baseAdminUrl + 'Categories/', method: 'GET', headers: headers},
         'createCategory': {url: baseAdminUrl + 'Categories/', method: 'POST', headers: headers},
         'editCategory': {url: baseAdminUrl + 'Categories/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
-        'deleteCategory': {url: baseAdminUrl + 'Categories/:id', params: {id: '@id'}, method: 'DELETE', headers: headers}
+        'deleteCategory': {
+            url: baseAdminUrl + 'Categories/:id',
+            params: {id: '@id'},
+            method: 'DELETE',
+            headers: headers
+        }
     });
 
     function getAllAds(params) {
@@ -139,17 +144,27 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return adminResource.getAllCategories(params);
     }
 
-    function adminCreateCategory(params) {
-        return adminResource.createCategory(params);
+    function adminCreateCategory(name) {
+        return adminResource.createCategory({name: name});
     }
 
-    function adminGetCategory(id){
+    function adminGetCategory(id) {
 
-        var categoryData = JSON.parse(localStorage.getItem('town_data'));
+        var categoryData = JSON.parse(localStorage.getItem('category_data'));
         if (categoryData && categoryData.id == id) {
+            categoryData.name = categoryData.username;
             return categoryData;
         }
         return undefined;
+    }
+
+
+    function editCategory(id, name) {
+        return adminResource.editCategory({'id': id}, {'name': name});
+    }
+
+    function deleteCategory(id) {
+        return adminResource.deleteCategory({'id': id});
     }
 
     return {
@@ -162,6 +177,8 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         editAd: editAd,
         deleteAd: deleteAd,
         deactivateAd: deactivateAd,
+        publishAgain: publishAgain,
+
         admin: {
             getAllAds: getAllAds,
             approveAd: approveAd,
@@ -180,9 +197,9 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
             categories: {
                 getAll: adminGetAllCategories,
                 create: adminCreateCategory,
-                getTown: adminGetTownData,
-                edit: editTown,
-                delete: deleteTown
+                getCategory: adminGetCategory,
+                edit: editCategory,
+                delete: deleteCategory
             }
 
         }

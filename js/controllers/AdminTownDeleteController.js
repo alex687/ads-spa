@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.controller('AdminTownDeleteController', function AdminTownDeleteController($scope, adsData, $stateParams, $state) {
+adsApp.controller('AdminTownDeleteController', function AdminTownDeleteController($scope, adsData, $stateParams, $state, storageData) {
 
     var townData = adsData.admin.towns.getTown($stateParams.townId);
     if (!townData) {
@@ -11,7 +11,7 @@ adsApp.controller('AdminTownDeleteController', function AdminTownDeleteControlle
     $scope.disabled = true;
     $scope.submit = function (name) {
         adsData.admin.towns.delete(townData.id).$promise.then(function (data) {
-                adsData.admin.towns.removeTownData(townData);
+                storageData.remove('town_data');
                 $scope.$emit('showSuccess', data.message);
             },
             function (data) {
