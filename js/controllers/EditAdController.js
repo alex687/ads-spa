@@ -27,7 +27,7 @@ adsApp.controller('EditAdController', function PublishAdController($scope, adsDa
             $scope.$emit('showSuccess', data.message);
             ad.changeImage = false;
         }, function (request) {
-            $scope.$emit('showAlert', request.data.message);
+            $scope.$emit('showAlert', request.data.modelState['model.Title']);
         });
     };
 
