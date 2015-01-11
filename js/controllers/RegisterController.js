@@ -14,7 +14,7 @@ adsApp.controller('RegisterController', function RegisterController($scope, user
             .$promise.then(function (data) {
                 $scope.registerAlert = false;
                 authorization.saveCredentials(data);
-                $state.go('home');
+                $state.go('user-home');
             }, function (request) {
                 $scope.$emit('showAlert', request.data.modelState[Object.keys(request.data.modelState)[0]]);
             });

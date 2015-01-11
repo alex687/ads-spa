@@ -6,7 +6,7 @@ adsApp.controller('LoginController', function LoginController($scope, userData, 
     $scope.login = function (user) {
         userData.login(user.username, user.password).$promise.then(function (data) {
             authorization.saveCredentials(data);
-            $state.go('home');
+            $state.go('user-home');
         }, function (request) {
             $scope.$emit('showAlert', request.data.error_description);
         });

@@ -54,6 +54,16 @@ var adsApp = angular
                     }
                 }
             })
+            .state('user-home', {
+                url: "/user/home",
+                templateUrl: "templates/home.html",
+                data: {
+                    permissions: {
+                        except: ['anonymous'],
+                        redirectTo: 'login'
+                    }
+                }
+            })
             .state('user-ads', {
                 url: "/user/ads/",
                 templateUrl: "templates/user-ads.html",
