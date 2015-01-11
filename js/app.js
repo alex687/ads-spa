@@ -171,7 +171,7 @@ var adsApp = angular
             })
             .state('admin-towns-create', {
                 url: "/admin/towns/create",
-                templateUrl: "templates/admin/towns-categories-create-edit.html",
+                templateUrl: "templates/admin/towns-categories-create-edit-delete.html",
                 controller: 'AdminTownCreateController',
                 data: {
                     permissions: {
@@ -180,8 +180,8 @@ var adsApp = angular
                     }
                 }
             }).state('admin-towns-edit', {
-                url: "/admin/towns/create",
-                templateUrl: "templates/admin/towns-categories-create-edit.html",
+                url: "/admin/towns/edit/:townId",
+                templateUrl: "templates/admin/towns-categories-create-edit-delete.html",
                 controller: 'AdminTownEditController',
                 data: {
                     permissions: {

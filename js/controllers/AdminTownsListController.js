@@ -22,14 +22,15 @@ adsApp.controller('AdminUserListController', function AdminUserListController($s
         loadTowns();
     };
 
-    $scope.userForEdit = function (user) {
-        adsData.admin.saveUserData(user);
-        $state.transitionTo('admin-towns-edit', {'userId': user.id});
+    $scope.forEdit = function (town) {
+        console.log(town);
+        adsData.admin.towns.saveTownData(town);
+        $state.transitionTo('admin-towns-edit', {'townId': town.id});
     };
 
-    $scope.userForDelete = function (user) {
-        adsData.admin.saveUserData(user);
-        $state.transitionTo('admin-towns-delete', {'userId': user.id});
+    $scope.forDelete = function (town) {
+        adsData.admin.towns.saveTownData(town);
+        $state.transitionTo('admin-towns-delete', {'townId': town.id});
     };
 
     $scope.$emit('changePageName', 'Admin Towns');
