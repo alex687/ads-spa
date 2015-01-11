@@ -11,8 +11,8 @@ adsApp.controller('DeleteAdController', function PublishAdController($scope, ads
     $scope.delete = function () {
         adsData.deleteAd($stateParams.adId).$promise.then(function (data) {
             $scope.$emit('showSuccess', data.message);
-        }, function (data) {
-            $scope.$emit('showAlert', data.error_description);
+        }, function (request) {
+            $scope.$emit('showAlert', request.data.message);
         });
     };
 

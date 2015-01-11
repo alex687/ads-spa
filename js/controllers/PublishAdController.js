@@ -16,8 +16,8 @@ adsApp.controller('PublishAdController', function PublishAdController($scope, ad
     $scope.submit = function (ad) {
         adsData.createNewAd(ad).$promise.then(function (data) {
             $scope.$emit('showSuccess', data.message);
-        }, function (data) {
-            $scope.$emit('showAlert', data.error_description);
+        }, function (request) {
+            $scope.$emit('showAlert', request.data.message);
         });
     };
 

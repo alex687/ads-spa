@@ -36,6 +36,7 @@ adsApp.factory('authorization', function ($q, ipCookie) {
     function logout(){
         ipCookie.remove('access_token', {path : '/'});
         ipCookie.remove('username', {path : '/'});
+        ipCookie.remove('admin', {path : '/'});
     }
 
     return {

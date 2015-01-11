@@ -1,6 +1,6 @@
 'use strict';
 
-adsApp.controller('AdminTownsListController', function AdminTownsListController($scope, adsData, pageSize, $state) {
+adsApp.controller('AdminTownsListController', function AdminTownsListController($scope, adsData, pageSize, $state, storageData) {
     var params = {PageSize: pageSize * 3, SortBy: 'Id'};
     $scope.pageSize = pageSize * 3;
 
@@ -23,12 +23,12 @@ adsApp.controller('AdminTownsListController', function AdminTownsListController(
     };
 
     $scope.forEdit = function (town) {
-        adsData.admin.towns.saveTownData(town);
+        storageData.save('town_data',town);
         $state.transitionTo('admin-towns-edit', {'townId': town.id});
     };
 
     $scope.forDelete = function (town) {
-        adsData.admin.towns.saveTownData(town);
+        storageData.save('town_data',town);
         $state.transitionTo('admin-towns-delete', {'townId': town.id});
     };
 

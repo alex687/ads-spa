@@ -8,7 +8,7 @@ adsApp.controller('LoginController', function LoginController($scope, userData, 
             authorization.saveCredentials(data);
             $state.go('user-home');
         }, function (request) {
-            $scope.$emit('showAlert', request.data.error_description);
+            $scope.$emit('showAlert', request.data.message);
         });
     };
 });

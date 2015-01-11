@@ -14,8 +14,8 @@ adsApp.controller('AdminTownEditController', function AdminTownEditController($s
                 townData.username = $scope.name;
                 storageData.save('town_data',townData);
             },
-            function (data) {
-                $scope.$emit('showAlert', data.message);
+            function (request) {
+                $scope.$emit('showAlert', request.data.message);
             });
     };
 
