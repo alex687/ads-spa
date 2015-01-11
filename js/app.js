@@ -189,6 +189,16 @@ var adsApp = angular
                         redirectTo: 'home'
                     }
                 }
+            }).state('admin-towns-delete', {
+                url: "/admin/towns/delete/:townId",
+                templateUrl: "templates/admin/towns-categories-create-edit-delete.html",
+                controller: 'AdminTownDeleteController',
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: 'home'
+                    }
+                }
             });
     })
     .constant('serviceBaseUrl', 'http://softuni-ads.azurewebsites.net/api/')

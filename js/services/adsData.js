@@ -76,7 +76,8 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         'deleteAd': {url: baseAdminUrl + 'Ads/:id', params: {id: '@id'}, method: 'DELETE', headers: headers},
         'getAllTowns': {url: baseAdminUrl + 'Towns/', method: 'GET', headers: headers},
         'createTown': {url: baseAdminUrl + 'Towns/', method: 'POST', headers: headers},
-        'editTown': {url: baseAdminUrl + 'Towns/:id', params: {id: '@id'}, method: 'PUT', headers: headers}
+        'editTown': {url: baseAdminUrl + 'Towns/:id', params: {id: '@id'}, method: 'PUT', headers: headers},
+        'deleteTown': {url: baseAdminUrl + 'Towns/:id', params: {id: '@id'}, method: 'DELETE', headers: headers}
     });
 
     function getAllAds(params) {
@@ -134,6 +135,10 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
         return adminResource.editTown({'id': id}, {name: name});
     }
 
+    function deleteTown(id){
+        return adminResource.deleteTown({'id': id});
+    }
+
     return {
         getAllPublishedAds: getAllPublishedAds,
         getALlTowns: getAllTowns,
@@ -157,7 +162,8 @@ adsApp.factory('adsData', function ($resource, $http, serviceBaseUrl, authorizat
                 getTown: adminGetTownData,
                 saveTownData: adminSaveTownData,
                 removeTownData: adminRemoveTownData,
-                edit: editTown
+                edit: editTown,
+                delete: deleteTown
             }
         }
     }
